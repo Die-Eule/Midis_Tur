@@ -7,7 +7,6 @@
         <!-- Logo -->
         <div class="shrink-0 flex items-center min-w-[20rem]">
             <a href="{{ route('dashboard') }}" class="flex items-center">
-                <!--<x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />-->
                 <img src="{{ Vite::asset('resources/images/logo.png') }}" alt="" class="w-10">
                 <p class="w-64 ml-6 font-medium text-orange-600 [text-shadow:_0_4px_4px_rgb(0_0_0_/_0.4)]">Международный институт дизайна и сервиса</p>
             </a>
@@ -27,7 +26,6 @@
             <x-dropdown align="right" width="48">
                 <x-slot name="trigger">
                     <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                        <!-- <div>{{ Auth::user()->name }}</div> -->
                             <div class="text-lg font-normal text-orange-600 [text-shadow:_0_4px_4px_rgb(0_0_0_/_0.4)]">Мой профиль</div>
 
                         <div class="ms-1 text-orange-600 [text-shadow:_0_4px_4px_rgb(0_0_0_/_0.4)]">
