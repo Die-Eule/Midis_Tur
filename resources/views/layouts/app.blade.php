@@ -14,7 +14,7 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-inter antialiased">
     @isset($header1)
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900 bg-[url('../images/background_main.png')]">
             @include('layouts.header1')
