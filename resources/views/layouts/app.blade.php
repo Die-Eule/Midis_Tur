@@ -20,7 +20,7 @@
             @include('layouts.header1')
     @endisset
     @isset($header2)
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+        <div class="min-h-screen bg-stone-200 dark:bg-gray-900">
             @include('layouts.header2')
     @endisset
             <!-- Page Content -->
