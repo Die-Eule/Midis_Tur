@@ -9,6 +9,10 @@ Route::get('/', function () {
 Route::get('/d2', function () {
     return view('dashboard2');
 })->middleware(['auth', 'verified'])->name('dashboard2');
+Route::get('/d3', function () {
+    return view('dashboard3');
+})->middleware(['auth', 'verified'])->name('dashboard3');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
