@@ -1,5 +1,4 @@
 <x-app-layout>
-    <x-slot name="header2"></x-slot>
 
     <!--Body-->
     <div class="w-full h-full flex flex-col items-center">
@@ -25,27 +24,4 @@
                 <p class="text-black text-base absolute bottom-0 left-0 bg-white/85 w-[100%] rounded-b-xl py-2">&emsp;Взгляните на работы студентов кафедры</p>
             </div>
         </div>
-
-    <!--footer-->
-    <div class="max-w-full p-10 mt-16 sm:px-6 lg:px-8 flex justify-center items-center max-h-[64px] text-orange-600">
-
-        <!-- Logo -->
-        <div class="shrink-0 flex items-center min-w-[20rem]">
-            <a href="{{ route('dashboard') }}" class="flex items-center">
-                <img src="{{ Vite::asset('resources/images/logo.png') }}" alt="logo" class="w-10">
-                <p class="w-64 ml-6 font-medium">Международный институт дизайна и сервиса</p>
-            </a>
-        </div>
-
-        <div class="flex items-center min-w-[20rem] lg:mx-20">
-            <img src="{{ Vite::asset('resources/images/telegram_orange.png') }}" alt="telegram-icon" class="w-10">
-            <img src="{{ Vite::asset('resources/images/vk_orange.png') }}" alt="vk-icon" class="w-10">
-            <div class="ml-8 font-medium">
-                <p>+7 (351) 202-00-73</p>
-                <p>info@midis.ru</p>
-            </div>
-        </div>
-
-        <p>© 2025</p>
-    </div>
 </x-app-layout>

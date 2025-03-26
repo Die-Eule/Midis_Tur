@@ -15,18 +15,24 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-inter antialiased">
-    @isset($header1)
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900 bg-[url('../images/background_main.png')]">
-            @include('layouts.header1')
-    @endisset
-    @isset($header2)
-        <div class="min-h-screen bg-stone-200 dark:bg-gray-900">
-            @include('layouts.header2')
-    @endisset
+        <div @class([
+                'min-h-screen',
+                'bg-stone-200' => ! @isset($attributes['specialStyle']),
+                'bg-gray-100' => @isset($attributes['specialStyle']),
+                "bg-[url('../images/background_main.png')]" => @isset($attributes['specialStyle'])
+        ])>
+            @php
+                $colorOption = @isset($attributes['specialStyle']) ? 1 : 2;
+            @endphp
+
+            <x-header :option=$colorOption/>
+
             <!-- Page Content -->
             <main>
                 {{ $slot }}
             </main>
+
+            <x-footer :option=$colorOption/>
 
         </div>
     </body>
