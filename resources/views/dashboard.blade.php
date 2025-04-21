@@ -1,7 +1,20 @@
 <x-app-layout specialStyle>
 
     <!--Body-->
-    <div class="w-full h-[1016px]">    
+    <div class="w-full h-[1016px]"> 
+           <ul role="list" class="text-stone-50 list-disc marker:text-orange-400 flex w-[100%] justify-center">
+            <li class="w-[20%] mt-[5%]"><a class="text-orange-400 underline underline-offset-4">Подпишитесь</a> на рассылку всего института или отдельных кафедр и получайте уведомления об изменениях в институте</li>
+            <li class="w-[5%] mt-[10%] text-orange-600 uppercase text-2xl list-none">А<br>так<br>же</li>
+            <li class="w-[20%] mt-[12%]">Отправьтесь в небольшое путешествие по всему институту</li>
+            <li class="w-[5%] mt-[8%] list-none text-orange-600 uppercase text-2xl">Или</li>
+            <li class="w-[20%] mt-[5%]">Посмотрите свой маршрут исходя из выбранной вами специальности</li>
+            <li class="w-[20%] mt-[7%] list-none">
+                <div>
+                    <img src="{{ Vite::asset('resources/images/arrow_bg.svg') }}" alt="" class="w-40 h-40 mb-14">
+                    <x-primary-button onclick="window.location='{{ route('dashboard2') }}'">Выбрать свой маршрут</x-primary-button>
+                </div>
+            </li>
+           </ul>
         <!-- <a class="text-9xl text-center text-stone-50" href="{{ route('dashboard2') }}" class="flex items-center">
             <p>Ссылка</p>
         </a> -->
