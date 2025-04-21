@@ -14,17 +14,17 @@
                 <p class="text-black text-base absolute bottom-0 left-0 bg-white/85 w-[100%] rounded-b-xl py-2">&emsp;Посмотрите небольшой видео-обзор кафедры</p>
             </button>
 
-            <div class="bg-[url('../images/foto.png')] bg-cover bg-center p-10 rounded-xl w-[500px] h-[280px] mb-10 mx-6 relative shadow-lg">
+            <a href="{{ route('dashboard6') }}"><div class="bg-[url('../images/foto.png')] bg-cover bg-center p-10 rounded-xl w-[500px] h-[280px] mb-10 mx-6 relative shadow-lg">
                 <p class="text-black text-base absolute bottom-0 left-0 bg-white/85 w-[100%] rounded-b-xl py-2">&emsp;Посмотрите фото с кафедры</p>
-            </div>
+            </div></a>
 
-            <div class="bg-[url('../images/lehrer.png')] bg-cover bg-center p-10 rounded-xl w-[500px] h-[280px] mb-10 mx-6 relative shadow-lg">
+            <a href="{{ route('dashboard4') }}"><div class="bg-[url('../images/lehrer.png')] bg-cover bg-center p-10 rounded-xl w-[500px] h-[280px] mb-10 mx-6 relative shadow-lg">
                 <p class="text-black text-base absolute bottom-0 left-0 bg-white/85 w-[100%] rounded-b-xl py-2">&emsp;Познакомьтесь с преподавателями кафедры</p>
-            </div>
+            </div></a>
 
-            <div class="bg-[url('../images/job.png')] bg-cover bg-center p-10 rounded-xl w-[500px] h-[280px] mb-10 mx-6 relative shadow-lg">
+            <a href="{{ route('dashboard5') }}"><div class="bg-[url('../images/job.png')] bg-cover bg-center p-10 rounded-xl w-[500px] h-[280px] mb-10 mx-6 relative shadow-lg">
                 <p class="text-black text-base absolute bottom-0 left-0 bg-white/85 w-[100%] rounded-b-xl py-2">&emsp;Взгляните на работы студентов кафедры</p>
-            </div>
+            </div></a>
         </div>
 
         <x-modal name="video-tour" maxWidth="7xl" shift="20">
