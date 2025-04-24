@@ -1,54 +1,93 @@
 <x-app-layout>
 
     <!--Body-->
-    <div class="w-full h-full flex flex-col items-center">
-        <!-- <a class="text-9xl text-center" href="{{ route('dashboard') }}" class="flex items-center">
-            <p>Ссылка</p>
-        </a> -->
+    <div class="w-full h-full flex flex-col items-center" x-data="{ lslide: true }">
         <div class="font-kslab uppercase mt-16 flex flex-col justify-center items-center text-3xl text-orange-600">
             <p>Где вы планируете проходить обучение?</p>
-            <p class="mt-8">Колледж на базе 9 классов / 11 классов</p>
+            <p class="mt-8">Колледж на базе 
+                <span class="cursor-pointer" x-on:click="lslide = true" :class="lslide && 'underline'">9 классов</span> / 
+                <span class="cursor-pointer" x-on:click="lslide = false":class="lslide || 'underline'">11 классов</span>
+            </p>
         </div>
 
-        <div class="xl:columns-2 mt-14">
-            <div class="bg-white p-10 rounded-xl w-[500px] mb-10 mx-6 shadow-lg">
-                <p class="font-kslab text-orange-600 text-lg mb-4">Дизайн</p>
-                <ul role="list" class="list-disc marker:text-black ml-6 text-base/7">
-                    <li><a href="{{ route('dashboard3') }}" class="flex items-center">Графический дизайн и брендинг</a></li>
-                    <li>3D Моделирование для компьютерных игр</li>
-                    <li>Дизайн одежды и аксессуаров</li>
-                    <li>Дизайн интерьера</li>
-                    <li>Веб-дизайн и мобильная разработка</li>
-                </ul>
-            </div>
+        <div class="block overflow-x-hidden w-[calc(500px+3rem)] xl:w-[calc(1000px+7rem)]">
+            <div class="w-full flex duration-1000" :class="lslide || 'ml-[calc(-1000px-7rem)]'">
+                <div class="xl:columns-2 mt-14">
+                    <div class="bg-white p-10 rounded-xl w-[500px] h-[265px] mb-10 mx-6 shadow-lg">
+                        <p class="font-kslab text-orange-600 text-lg mb-4">Дизайн</p>
+                        <ul role="list" class="list-disc marker:text-black ml-6 text-base/7">
+                            <li><a href="{{ route('dashboard3') }}" class="flex items-center">Графический дизайн и брендинг</a></li>
+                            <li>3D Моделирование для компьютерных игр</li>
+                            <li>Дизайн одежды и аксессуаров</li>
+                            <li>Дизайн интерьера</li>
+                            <li>Веб-дизайн и мобильная разработка</li>
+                        </ul>
+                    </div>
 
-            <div class="bg-white p-10 rounded-xl w-[500px] mb-10 mx-6 shadow-lg">
-                <p class="font-kslab text-orange-600 text-lg mb-4">IT-технологии</p>
-                <ul role="list" class="list-disc marker:text-black  ml-6">
-                    <li>Разработка веб и мультимедийных приложений</li>
-                </ul>
-            </div>
+                    <div class="bg-white p-10 rounded-xl w-[500px] h-[265px] mb-10 mx-6 shadow-lg">
+                        <p class="font-kslab text-orange-600 text-lg mb-4">IT-технологии</p>
+                        <ul role="list" class="list-disc marker:text-black  ml-6">
+                            <li>Разработка веб и мультимедийных приложений</li>
+                        </ul>
+                    </div>
 
-            <div class="bg-white p-10 rounded-xl w-[500px] mb-10 mx-6 shadow-lg">
-                <p class="font-kslab text-orange-600 text-lg mb-4">Экономика и управление</p>
-                <ul role="list" class="list-disc marker:text-black  ml-6">
-                    <li>Предпринимательство и интернет-маркетинг</li>
-                    <li>Организация кредитных и расчетных банковских операций</li>
-                </ul>
-            </div>
+                    <div class="bg-white p-10 rounded-xl w-[500px] h-[265px] mb-10 mx-6 shadow-lg">
+                        <p class="font-kslab text-orange-600 text-lg mb-4">Экономика и управление</p>
+                        <ul role="list" class="list-disc marker:text-black  ml-6">
+                            <li>Предпринимательство и интернет-маркетинг</li>
+                            <li>Организация кредитных и расчетных банковских операций</li>
+                        </ul>
+                    </div>
 
-            <div class="bg-white p-10 rounded-xl w-[500px] mb-10 mx-6 shadow-lg">
-                <p class="font-kslab text-orange-600 text-lg mb-4">Туризм и гостеприимство</p>
-                <ul role="list" class="list-disc marker:text-black  ml-6">
-                    <li>Администрирование отеля и организация экскурсионных услуг</li>
-                </ul>
+                    <div class="bg-white p-10 rounded-xl w-[500px] h-[265px] mb-10 mx-6 shadow-lg">
+                        <p class="font-kslab text-orange-600 text-lg mb-4">Туризм и гостеприимство</p>
+                        <ul role="list" class="list-disc marker:text-black  ml-6">
+                            <li>Администрирование отеля и организация экскурсионных услуг</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="xl:columns-2 mt-14">
+                    <div class="bg-white p-10 rounded-xl w-[500px] h-[265px] mb-10 mx-6 shadow-lg">
+                        <p class="font-kslab text-orange-600 text-lg mb-4">Дизайн</p>
+                        <ul role="list" class="list-disc marker:text-black ml-6 text-base/7">
+                            <li><a href="{{ route('dashboard3') }}" class="flex items-center">Графический дизайн и брендинг</a></li>
+                            <li>3D Моделирование для компьютерных игр</li>
+                            <li>Дизайн одежды и аксессуаров</li>
+                            <li>Дизайн интерьера</li>
+                            <li>Веб-дизайн и мобильная разработка</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white p-10 rounded-xl w-[500px] h-[265px] mb-10 mx-6 shadow-lg">
+                        <p class="font-kslab text-orange-600 text-lg mb-4">IT-технологии</p>
+                        <ul role="list" class="list-disc marker:text-black  ml-6">
+                            <li>Разработка веб и мультимедийных приложений</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white p-10 rounded-xl w-[500px] h-[265px] mb-10 mx-6 shadow-lg">
+                        <p class="font-kslab text-orange-600 text-lg mb-4">Экономика и управление</p>
+                        <ul role="list" class="list-disc marker:text-black  ml-6">
+                            <li>Предпринимательство и интернет-маркетинг</li>
+                            <li>Организация кредитных и расчетных банковских операций</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white p-10 rounded-xl w-[500px] h-[265px] mb-10 mx-6 shadow-lg">
+                        <p class="font-kslab text-orange-600 text-lg mb-4">Туризм и гостеприимство</p>
+                        <ul role="list" class="list-disc marker:text-black  ml-6">
+                            <li>Администрирование отеля и организация экскурсионных услуг</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
 
         <div class="font-kslab uppercase flex flex-col justify-center items-center text-3xl text-orange-600">
             <p class="mt-8">Институт</p>
         </div>
-<!-- start-changin -->
+
         <div class="xl:columns-2 mt-14">
             <div class="bg-white p-10 rounded-xl w-[500px] mb-10 mx-6 shadow-lg">
                 <p class="font-kslab text-orange-600 text-lg mb-4">Дизайн</p>
