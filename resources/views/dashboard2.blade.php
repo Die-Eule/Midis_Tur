@@ -13,73 +13,31 @@
         <div class="block overflow-x-hidden w-[calc(500px+3rem)] xl:w-[calc(1000px+7rem)]">
             <div class="w-full flex duration-1000" :class="lslide || 'ml-[calc(-1000px-7rem)]'">
                 <div class="xl:columns-2 mt-14">
-                    <div class="bg-white p-10 rounded-xl w-[500px] h-[265px] mb-10 mx-6 shadow-lg">
-                        <p class="font-kslab text-orange-600 text-lg mb-4">Дизайн</p>
+                @foreach($directions['1'] as $direction)
+                    <div class="bg-white p-10 rounded-xl w-[500px] h-[265px] mb-10 mx-6 shadow-lg break-inside-avoid-column"
+                            x-on:click="window.location='{{ route('dashboard3', $direction->department_id) }}'">
+                        <p class="font-kslab text-orange-600 text-lg mb-4">{{$direction->name}}</p>
                         <ul role="list" class="list-disc marker:text-black ml-6 text-base/7">
-                            <li><a href="{{ route('dashboard3') }}" class="flex items-center">Графический дизайн и брендинг</a></li>
-                            <li>3D Моделирование для компьютерных игр</li>
-                            <li>Дизайн одежды и аксессуаров</li>
-                            <li>Дизайн интерьера</li>
-                            <li>Веб-дизайн и мобильная разработка</li>
+                        @foreach($specialties[$direction->id] as $specialty)
+                            <li>{{$specialty->name}}</li>
+                        @endforeach
                         </ul>
                     </div>
-
-                    <div class="bg-white p-10 rounded-xl w-[500px] h-[265px] mb-10 mx-6 shadow-lg">
-                        <p class="font-kslab text-orange-600 text-lg mb-4">IT-технологии</p>
-                        <ul role="list" class="list-disc marker:text-black  ml-6">
-                            <li>Разработка веб и мультимедийных приложений</li>
-                        </ul>
-                    </div>
-
-                    <div class="bg-white p-10 rounded-xl w-[500px] h-[265px] mb-10 mx-6 shadow-lg">
-                        <p class="font-kslab text-orange-600 text-lg mb-4">Экономика и управление</p>
-                        <ul role="list" class="list-disc marker:text-black  ml-6">
-                            <li>Предпринимательство и интернет-маркетинг</li>
-                            <li>Организация кредитных и расчетных банковских операций</li>
-                        </ul>
-                    </div>
-
-                    <div class="bg-white p-10 rounded-xl w-[500px] h-[265px] mb-10 mx-6 shadow-lg">
-                        <p class="font-kslab text-orange-600 text-lg mb-4">Туризм и гостеприимство</p>
-                        <ul role="list" class="list-disc marker:text-black  ml-6">
-                            <li>Администрирование отеля и организация экскурсионных услуг</li>
-                        </ul>
-                    </div>
+                @endforeach
                 </div>
 
                 <div class="xl:columns-2 mt-14">
-                    <div class="bg-white p-10 rounded-xl w-[500px] h-[265px] mb-10 mx-6 shadow-lg">
-                        <p class="font-kslab text-orange-600 text-lg mb-4">Дизайн</p>
+                @foreach($directions['2'] as $direction)
+                    <div class="bg-white p-10 rounded-xl w-[500px] h-[265px] mb-10 mx-6 shadow-lg break-inside-avoid-column"
+                            x-on:click="window.location='{{ route('dashboard3', $direction->department_id) }}'">
+                        <p class="font-kslab text-orange-600 text-lg mb-4">{{$direction->name}}</p>
                         <ul role="list" class="list-disc marker:text-black ml-6 text-base/7">
-                            <li><a href="{{ route('dashboard3') }}" class="flex items-center">Графический дизайн и брендинг</a></li>
-                            <li>3D Моделирование для компьютерных игр</li>
-                            <li>Дизайн одежды и аксессуаров</li>
-                            <li>Дизайн интерьера</li>
-                            <li>Веб-дизайн и мобильная разработка</li>
+                        @foreach($specialties[$direction->id] as $specialty)
+                            <li>{{$specialty->name}}</li>
+                        @endforeach
                         </ul>
                     </div>
-
-                    <div class="bg-white p-10 rounded-xl w-[500px] h-[265px] mb-10 mx-6 shadow-lg">
-                        <p class="font-kslab text-orange-600 text-lg mb-4">IT-технологии</p>
-                        <ul role="list" class="list-disc marker:text-black  ml-6">
-                            <li>Разработка веб и мультимедийных приложений</li>
-                        </ul>
-                    </div>
-
-                    <div class="bg-white p-10 rounded-xl w-[500px] h-[265px] mb-10 mx-6 shadow-lg">
-                        <p class="font-kslab text-orange-600 text-lg mb-4">Экономика и управление</p>
-                        <ul role="list" class="list-disc marker:text-black  ml-6">
-                            <li>Предпринимательство и интернет-маркетинг</li>
-                            <li>Организация кредитных и расчетных банковских операций</li>
-                        </ul>
-                    </div>
-
-                    <div class="bg-white p-10 rounded-xl w-[500px] h-[265px] mb-10 mx-6 shadow-lg">
-                        <p class="font-kslab text-orange-600 text-lg mb-4">Туризм и гостеприимство</p>
-                        <ul role="list" class="list-disc marker:text-black  ml-6">
-                            <li>Администрирование отеля и организация экскурсионных услуг</li>
-                        </ul>
-                    </div>
+                @endforeach
                 </div>
             </div>
         </div>
@@ -89,51 +47,17 @@
         </div>
 
         <div class="xl:columns-2 mt-14">
-            <div class="bg-white p-10 rounded-xl w-[500px] mb-10 mx-6 shadow-lg">
-                <p class="font-kslab text-orange-600 text-lg mb-4">Дизайн</p>
+        @foreach($directions['3'] as $direction)
+            <div class="bg-white p-10 rounded-xl w-[500px] mb-10 mx-6 shadow-lg break-inside-avoid-column"
+                    x-on:click="window.location='{{ route('dashboard3', $direction->department_id) }}'">
+                <p class="font-kslab text-orange-600 text-lg mb-4">{{$direction->name}}</p>
                 <ul role="list" class="list-disc marker:text-black ml-6 text-base/7">
-                    <li>Цифровая графика в индустрии компьютерных игр</li>
-                    <li>Графический дизайн и брендинг</li>
-                    <li>Дизайн среды</li>
-                    <li>Дизайн одежды и маркетинг в модной индустрии</li>
-                    <li>Web-дизайн и мобильная разработка</li>
-                    <li>Промышленный дизайн</li>
-                    <li>Гастрономический дизайн</li>
+                @foreach($specialties[$direction->id] as $specialty)
+                    <li>{{$specialty->name}}</li>
+                @endforeach
                 </ul>
             </div>
-
-            <div class="bg-white p-10 rounded-xl w-[500px] mb-10 mx-6 shadow-lg">
-                <p class="font-kslab text-orange-600 text-lg mb-4">Ресторанный и гостиничный бизнес</p>
-                <ul role="list" class="list-disc marker:text-black  ml-6">
-                    <li>Менеджмент в ресторанном и гостиничном бизнесе</li>
-                    <li>Управление бизнес-процессами в гастрономии</li>
-                    <li>Управление в гостиничном бизнесе</li>
-                </ul>
-            </div>
-
-            <div class="bg-white p-10 rounded-xl w-[500px] mb-10 mx-6 shadow-lg">
-                <p class="font-kslab text-orange-600 text-lg mb-4">IT - технологии</p>
-                <ul role="list" class="list-disc marker:text-black  ml-6">
-                    <li>Разработка компьютерных игр и приложений с виртуальной и дополненной реальностью (VR/AR)</li>
-                    <li>Разработка веб- и мобильных приложений</li>
-                    <li>Управление IT-проектами</li>
-                </ul>
-            </div>
-
-            <div class="bg-white p-10 rounded-xl w-[500px] mb-10 mx-6 shadow-lg">
-                <p class="font-kslab text-orange-600 text-lg mb-4">Лингвистика</p>
-                <ul role="list" class="list-disc marker:text-black  ml-6">
-                    <li>Перевод и международные бизнес-коммуникации</li>
-                </ul>
-            </div>
-
-            <div class="bg-white p-10 rounded-xl w-[500px] mb-10 mx-6 shadow-lg">
-                <p class="font-kslab text-orange-600 text-lg mb-4">Экономика и управление</p>
-                <ul role="list" class="list-disc marker:text-black  ml-6">
-                    <li>Управление бизнесом и интернет-маркетинг</li>
-                    <li>Продюсирование и маркетинг мероприятий</li>
-                </ul>
-            </div>
+        @endforeach
         </div>
         
     </div>
