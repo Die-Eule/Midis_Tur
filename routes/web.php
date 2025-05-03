@@ -2,12 +2,14 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DirectionController;
+use App\Http\Controllers\DepartmentController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('dashboard');
 })->name('dashboard');
 Route::get('/d2', [DirectionController::class, 'index'])->name('dashboard2');
+Route::get('/d3/{id}', [DepartmentController::class, 'index'])->name('dashboard3');
 Route::get('/d4', function () {
     return view('dashboard4');
 })->name('dashboard4');
