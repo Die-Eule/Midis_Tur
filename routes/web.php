@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DirectionController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -10,9 +11,7 @@ Route::get('/', function () {
 })->name('dashboard');
 Route::get('/d2', [DirectionController::class, 'index'])->name('dashboard2');
 Route::get('/d3/{id}', [DepartmentController::class, 'index'])->name('dashboard3');
-Route::get('/d4', function () {
-    return view('dashboard4');
-})->name('dashboard4');
+Route::get('/d4/{id}', [TeacherController::class, 'index'])->name('dashboard4');
 Route::get('/d5', function () {
     return view('dashboard5');
 })->name('dashboard5');
