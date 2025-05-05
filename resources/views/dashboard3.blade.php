@@ -8,23 +8,29 @@
         </div>
 
         <div class="xl:columns-2 mt-14">
-            <button class="bg-[url('../images/video.png')] bg-cover bg-center p-10 rounded-xl w-[500px] h-[280px] mb-10 mx-6 relative shadow-lg"
+            <button class="bg-[url('../images/dep/video.png')] bg-cover bg-center p-10 rounded-xl w-[500px] h-[280px] mb-10 mx-6 relative shadow-lg"
                     x-data=""
                     x-on:click.prevent="$dispatch('open-modal', 'video-tour')">
                 <p class="text-black text-base absolute bottom-0 left-0 bg-white/85 w-[100%] rounded-b-xl py-2">&emsp;Посмотрите небольшой видео-обзор кафедры</p>
             </button>
 
-            <a href="{{ route('dashboard6') }}"><div class="bg-[url('../images/foto.png')] bg-cover bg-center p-10 rounded-xl w-[500px] h-[280px] mb-10 mx-6 relative shadow-lg">
+            <a href="{{ route('dashboard6', $department->id) }}"><div class="bg-[url('../images/dep/foto.png')] bg-cover bg-center p-10 rounded-xl w-[500px] h-[280px] mb-10 mx-6 relative shadow-lg">
                 <p class="text-black text-base absolute bottom-0 left-0 bg-white/85 w-[100%] rounded-b-xl py-2">&emsp;Посмотрите фото с кафедры</p>
             </div></a>
 
-            <a href="{{ route('dashboard4', $department->id) }}"><div class="bg-[url('../images/lehrer.png')] bg-cover bg-center p-10 rounded-xl w-[500px] h-[280px] mb-10 mx-6 relative shadow-lg">
+            <a href="{{ route('dashboard4', $department->id) }}"><div class="bg-[url('../images/dep/lehrer.png')] bg-cover bg-center p-10 rounded-xl w-[500px] h-[280px] mb-10 mx-6 relative shadow-lg">
                 <p class="text-black text-base absolute bottom-0 left-0 bg-white/85 w-[100%] rounded-b-xl py-2">&emsp;Познакомьтесь с преподавателями кафедры</p>
             </div></a>
 
-            <a href="{{ route('dashboard5') }}"><div class="bg-[url('../images/{{$department->pic}}')] bg-cover bg-center p-10 rounded-xl w-[500px] h-[280px] mb-10 mx-6 relative shadow-lg">
-                <p class="text-black text-base absolute bottom-0 left-0 bg-white/85 w-[100%] rounded-b-xl py-2">&emsp;Взгляните на работы студентов кафедры</p>
-            </div></a>
+            @php
+
+            @endphp
+            <a href="{{ route('dashboard5') }}">
+                <div style="background-image: url({{ Vite::asset('resources/images/'.$department->pic) }})"
+                        class="bg-cover bg-center p-10 rounded-xl w-[500px] h-[280px] mb-10 mx-6 relative shadow-lg">
+                    <p class="text-black text-base absolute bottom-0 left-0 bg-white/85 w-[100%] rounded-b-xl py-2">&emsp;Взгляните на работы студентов кафедры</p>
+                </div>
+            </a>
         </div>
 
         <x-modal name="video-tour" maxWidth="7xl" shift="20">

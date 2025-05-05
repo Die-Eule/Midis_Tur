@@ -28,7 +28,7 @@ class DepartmentSeeder extends Seeder
             [
                 'id' => 3,
                 'name' => 'Кафедра Математики и Информатики',
-                'pic' => 'dep/IT.png',
+                'pic' => 'dep/3/students.png',
                 'video' => 'IT_tour.mp4',
             ],
             [
