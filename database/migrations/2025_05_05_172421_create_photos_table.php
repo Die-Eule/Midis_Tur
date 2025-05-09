@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('photos', function (Blueprint $table) {
             $table->id();
             $table->string('path');
+            $table->foreignId('ptoject_id')->index();
             $table->foreignId('department_id')->index();
             $table->timestamps();
         });
