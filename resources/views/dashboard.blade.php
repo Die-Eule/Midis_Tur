@@ -7,11 +7,11 @@
             <li class="w-[5%] mt-[10%] text-orange-600 uppercase text-2xl list-none">А<br>так<br>же</li>
             <li class="w-[20%] mt-[12%]">Отправьтесь в небольшое путешествие по всему институту</li>
             <li class="w-[5%] mt-[8%] list-none text-orange-600 uppercase text-2xl">Или</li>
-            <li class="w-[20%] mt-[5%]">Посмотрите свой маршрут исходя из выбранной вами специальности</li>
+            <li class="w-[20%] mt-[5%]">Посмотрите свой путь исходя из выбранной вами специальности</li>
             <li class="w-[20%] mt-[7%] list-none">
                 <div>
                     <img src="{{ Vite::asset('resources/images/arrow_bg.svg') }}" alt="" class="w-40 h-40 mb-14">
-                    <x-primary-button onclick="window.location='{{ route('dashboard2') }}'">Выбрать свой маршрут</x-primary-button>
+                    <x-primary-button onclick="window.location='{{ route('dashboard2') }}'">Выбрать свой путь</x-primary-button>
                 </div>
             </li>
            </ul>
