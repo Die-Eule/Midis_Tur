@@ -8,30 +8,21 @@
                     <img src="{{ Vite::asset('resources/images/arrow.svg') }}" class="hover:h-[32px]" alt="">
                 </a>
             </div>
-            <p>Кафедра математики и информатики</p>
+            <p>{{$department->name}}</p>
         </div>
 
-        <div class="flex flex-wrap justify-between w-[450px] xl:w-[900px] mt-14">
-            <div class="mb-8">
-                <img src="{{ Vite::asset('resources/images/job1.png') }}" alt="" class="w-[375px] h-[520px] shadow-lg rounded-xl object-cover">
-                <p class="w-[375px] mt-2">Работа студента 3 курса, Килиной Ирины</p>
-            </div>
-
-            <div class="mb-8">
-                <img src="{{ Vite::asset('resources/images/job1.png') }}" alt="" class="w-[375px] h-[520px] shadow-lg rounded-xl object-cover">
-                <p class="w-[375px] mt-2">Работа студента 3 курса, Килиной Ирины</p>
-            </div>
-            
-            <div class="mb-8">
-                <img src="{{ Vite::asset('resources/images/job1.png') }}" alt="" class="w-[375px] h-[520px] shadow-lg rounded-xl object-cover">
-                <p class="w-[375px] mt-2">Работа студента 3 курса, Килиной Ирины</p>
-            </div>
-
-            <div class="mb-8">
-                <img src="{{ Vite::asset('resources/images/job1.png') }}" alt="" class="w-[375px] h-[520px] shadow-lg rounded-xl object-cover">
-                <p class="w-[375px] mt-2">Работа студента 3 курса, Килиной Ирины</p>
-            </div>
-
+        <div class="xl:columns-2 mt-14">
+            @foreach($projects as $proj)
+                <div class="mb-8 break-inside-avoid-column">
+                    @php
+                        list($img_w, $img_h) = getimagesize(resource_path('images/'.$gallery[$proj->id]->first()->path));
+                        $img_fit = $img_w < $img_h ? 'object-contain' : 'object-cover';
+                    @endphp
+                    <img src="{{ Vite::asset('resources/images/'.$gallery[$proj->id]->first()->path) }}" alt=""
+                        class="w-[500px] h-[320px] shadow-lg rounded-xl {{$img_fit}} bg-stone-700 mb-3 mx-6">
+                    <p class="w-[500px] mt-2 mx-6">{{$proj->description}}</p>
+                </div>
+            @endforeach
         </div>
 
 </x-app-layout>

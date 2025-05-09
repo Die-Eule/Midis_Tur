@@ -9,7 +9,7 @@
                         <img src="{{ Vite::asset('resources/images/arrow.svg') }}" class="hover:h-[32px]" alt="">
                     </a>
                 </div>
-            <p>{{$department->name}}</p>
+                <p>{{$department->name}}</p>
             </div>
             <p class="mt-8">Войти / Зарегистрироваться</p>
         </div>
@@ -32,7 +32,7 @@
             @php
 
             @endphp
-            <a href="{{ route('dashboard5') }}">
+            <a href="{{ route('dashboard5', $department->id) }}">
                 <div style="background-image: url({{ Vite::asset('resources/images/'.$department->pic) }})"
                         class="bg-cover bg-center p-10 rounded-xl w-[500px] h-[280px] mb-10 mx-6 relative shadow-lg">
                     <p class="text-black text-base absolute bottom-0 left-0 bg-white/85 w-[100%] rounded-b-xl py-2">&emsp;Взгляните на работы студентов кафедры</p>
