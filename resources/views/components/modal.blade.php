@@ -39,8 +39,17 @@ $shift = $shift === '0' ? '' : 'sm:mt-'.$shift;
         if (value) {
             document.body.classList.add('overflow-y-hidden');
             {{ $attributes->has('focusable') ? 'setTimeout(() => firstFocusable().focus(), 100)' : '' }}
+            $videoPlayer = $el.querySelector('video');
+            if ($videoPlayer) {
+                $videoPlayer.play();
+            }
         } else {
             document.body.classList.remove('overflow-y-hidden');
+            $videoPlayer = $el.querySelector('video');
+            if ($videoPlayer) {
+                $videoPlayer.pause();
+                $videoPlayer.currentTime = 0;
+            }
         }
     })"
     x-on:open-modal.window="$event.detail == '{{ $name }}' ? show = true : null"
