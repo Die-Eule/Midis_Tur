@@ -2,7 +2,8 @@
     'name',
     'show' => false,
     'maxWidth' => '2xl',
-    'shift' => '0'
+    'shift' => '0',
+    'bg' => true
 ])
 
 @php
@@ -16,6 +17,7 @@ $maxWidth = [
 ][$maxWidth];
 
 $shift = $shift === '0' ? '' : 'sm:mt-'.$shift;
+$background = $bg ? 'bg-white dark:bg-gray-800 shadow-xl' : '';
 @endphp
 
 <div
@@ -78,7 +80,7 @@ $shift = $shift === '0' ? '' : 'sm:mt-'.$shift;
 
     <div
         x-show="show"
-        class="mb-6 bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-xl transform transition-all sm:w-full {{ $maxWidth }} sm:mx-auto {{ $shift }}"
+        class="mb-6 {{ $background }} rounded-lg overflow-hidden transform transition-all sm:w-full {{ $maxWidth }} sm:mx-auto {{ $shift }}"
         x-transition:enter="ease-out duration-300"
         x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
         x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
@@ -87,5 +89,5 @@ $shift = $shift === '0' ? '' : 'sm:mt-'.$shift;
         x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
     >
         {{ $slot }}
-    </div>
+    </div>  
 </div>
