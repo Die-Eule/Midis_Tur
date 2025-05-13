@@ -18,9 +18,12 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
+        'surname',
         'name',
+        'patranomic',
         'email',
         'password',
+        'tel',
     ];
 
     /**
@@ -44,5 +47,11 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    const ADMIN_ROLE = 'admin';
+
+    public function isAdmin() {
+        return $this->role === self::ADMIN_ROLE;
     }
 }

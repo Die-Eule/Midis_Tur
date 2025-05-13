@@ -31,9 +31,9 @@
             </div>
 
             <div class="w-full">
-                <x-input-label for="middlename" :value="__('Отчество')" />
-                <x-text-input id="middlename" name="middlename" type="text" class="mt-1 block w-full" :value="old('middlename', $user->middlename)" required autofocus autocomplete="additional-name" />
-                <x-input-error class="mt-2" :messages="$errors->get('middlename')" />
+                <x-input-label for="patranomic" :value="__('Отчество')" />
+                <x-text-input id="patranomic" name="patranomic" type="text" class="mt-1 block w-full" :value="old('patranomic', $user->patranomic)" required autofocus autocomplete="additional-name" />
+                <x-input-error class="mt-2" :messages="$errors->get('patranomic')" />
             </div>
         </div>
 
@@ -64,7 +64,7 @@
 
             <div class="w-full">
                 <x-input-label for="tel" :value="__('Телефон')" />
-                <x-text-input id="tel" name="tel" class="mt-1 block w-full" :value="old('tel', $user->tel)" required autofocus autocomplete="tel" />
+                <x-text-input id="tel" name="tel" class="mt-1 block w-full" :value="old('tel', $user->tel)" autofocus autocomplete="tel" />
                 <x-input-error class="mt-2" :messages="$errors->get('tel')" />
             </div>
 

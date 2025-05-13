@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,5 +19,15 @@ class DatabaseSeeder extends Seeder
         $this->call(TeacherSeeder::class);
         $this->call(ProjectSeeder::class);
         $this->call(PhotoSeeder::class);
+
+        User::factory()->create([
+            'surname' => 'Сисадминов',
+            'name' => 'Девопс',
+            'patranomic' => 'Изернетович',
+            'email' => 'root@midis.ru',
+            'password' => '$2y$12$Ol1AcL6jy2rysYEy5uO.2.1pLKfFGM2QzX0RUdXxxDxzU5g1x4On2',
+            'tel' => null,
+            'role' => 'admin',
+        ]);
     }
 }
