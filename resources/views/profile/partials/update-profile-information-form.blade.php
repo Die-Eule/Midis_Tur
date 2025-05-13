@@ -19,27 +19,27 @@
 
         <div class="flex flex-col w-[49%] space-y-6">
             <div class="w-full">
-                <x-input-label for="name" :value="__('Фамилия')" />
-                <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
-                <x-input-error class="mt-2" :messages="$errors->get('name')" />
+                <x-input-label for="surname" :value="__('Фамилия')" />
+                <x-text-input id="surname" name="surname" type="text" class="mt-1 block w-full" :value="old('surname', $user->surname)" required autofocus autocomplete="family-name" />
+                <x-input-error class="mt-2" :messages="$errors->get('surname')" />
             </div>
 
             <div class="w-full">
                 <x-input-label for="name" :value="__('Имя')" />
-                <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
+                <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="given-name" />
                 <x-input-error class="mt-2" :messages="$errors->get('name')" />
             </div>
 
             <div class="w-full">
-                <x-input-label for="name" :value="__('Отчество')" />
-                <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
-                <x-input-error class="mt-2" :messages="$errors->get('name')" />
+                <x-input-label for="middlename" :value="__('Отчество')" />
+                <x-text-input id="middlename" name="middlename" type="text" class="mt-1 block w-full" :value="old('middlename', $user->middlename)" required autofocus autocomplete="additional-name" />
+                <x-input-error class="mt-2" :messages="$errors->get('middlename')" />
             </div>
         </div>
 
         <div class="flex flex-col w-[49%] space-y-6">
             <div class="w-full">
-                <x-input-label for="email" :value="__('E-mail')" />
+                <x-input-label for="email" :value="__('Email')" />
                 <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
                 <x-input-error class="mt-2" :messages="$errors->get('email')" />
 
@@ -63,9 +63,9 @@
             </div>
 
             <div class="w-full">
-                <x-input-label for="name" :value="__('Телефон')" />
-                <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
-                <x-input-error class="mt-2" :messages="$errors->get('name')" />
+                <x-input-label for="tel" :value="__('Телефон')" />
+                <x-text-input id="tel" name="tel" class="mt-1 block w-full" :value="old('tel', $user->tel)" required autofocus autocomplete="tel" />
+                <x-input-error class="mt-2" :messages="$errors->get('tel')" />
             </div>
 
             <div class="w-full flex flex-row-reverse justify-start items-end gap-4 h-20">
