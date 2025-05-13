@@ -20,16 +20,16 @@
             @endforeach
         </div>
 
-        <x-modal name="gallery" maxWidth="7xl" shift="20" :bg="false">
-            <div class="flex justify-center items-center">
+        <x-modal-viz name="gallery" maxWidth="7xl">
+            <div class="flex justify-center items-center min-h-[95vh]">
                 <div class="w-[20px]" x-on:click="selected > 0 ? selected-- : null">
                     <img src="{{ Vite::asset('resources/images/arrow.svg') }}" class="hover:w-[20px]" alt="">
                 </div>
-                <img :src="collection[selected]" alt="" class="mx-5">
+                <img :src="collection[selected]" alt="" class="mx-5 sm:max-w-6xl max-h-[94vh]">
                 <div class="w-[20px]" x-on:click="selected < {{ $gallery->count() - 1 }} ? selected++ : null">
                     <img src="{{ Vite::asset('resources/images/arrow.svg') }}" class="hover:w-[20px] -scale-x-100" alt="">
                 </div>
             </div>
-        </x-modal>
+        </x-modal-viz>
 
 </x-app-layout>

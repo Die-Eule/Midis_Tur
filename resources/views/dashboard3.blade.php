@@ -37,11 +37,11 @@
             </a>
         </div>
 
-        <x-modal name="video-tour" maxWidth="7xl" shift="20">
+        <x-modal-viz name="video-tour" maxWidth="7xl" shift>
             <video controls>
                 <source src="{{ Vite::asset('resources/video/'.$department->video) }}" type="video/mp4">
                 Ваш браузер не поддерживает встроенные видео.
             </video>
-        </x-modal>
+        </x-modal-viz>
 
 </x-app-layout>
