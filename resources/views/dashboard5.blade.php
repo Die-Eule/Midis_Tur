@@ -13,7 +13,7 @@
         </div>
 
         <script>
-            collection = JSON.parse({!!json_encode($gallery->toJson())!!});
+            var collection = {{ Js::from($gallery) }};
         </script>
 
         <div class="xl:columns-2 mt-14">
