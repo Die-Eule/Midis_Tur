@@ -11,7 +11,15 @@
                 </div>
                 <p>{{$department->name}}</p>
             </div>
-            <p class="mt-8">Войти / Зарегистрироваться</p>
+            @if(!Auth::check())
+                <a href="{{ route('login') }}"><p class="mt-8">Войти / Зарегистрироваться</p></a>
+            @elseif(!$subscription)
+                <form method="POST" action="{{ route('subscription.add', $department->id) }}" class="mt-8">
+                    @csrf
+                    @method('put')
+                    <button type="submit">Подписаться на рассылку</button>
+                </form>
+            @endif
         </div>
 
         <div class="xl:columns-2 mt-14">
