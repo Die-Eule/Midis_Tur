@@ -22,6 +22,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::put('/profile/subscription/all', [ProfileController::class, 'subscribeAll'])->name('subscription.full');
+    Route::put('/profile/subscription/{id}', [ProfileController::class, 'subscribe'])->name('subscription.add');
+    Route::delete('/profile/subscription/{id}', [ProfileController::class, 'unsubscribe'])->name('subscription.delete');
 
     Route::patch('/d2', [DirectionController::class, 'update'])->name('dashboard2.update');
 });
