@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\MainController;
 use App\Http\Controllers\DirectionController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\TeacherController;
@@ -8,9 +9,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\PhotoController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::get('/', [MainController::class, 'index'])->name('dashboard');
 Route::get('/d2', [DirectionController::class, 'index'])->name('dashboard2');
 Route::get('/d3/{id}', [DepartmentController::class, 'index'])->name('dashboard3');
 Route::get('/d4/{id}', [TeacherController::class, 'index'])->name('dashboard4');

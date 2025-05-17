@@ -3,7 +3,18 @@
     <!--Body-->
     <div class="w-full h-[1016px]"> 
            <ul role="list" class="text-stone-50 list-disc marker:text-orange-400 flex w-[100%] justify-center">
-            <li class="w-[20%] mt-[5%]"><a class="text-orange-400 underline underline-offset-4">Подпишитесь</a> на рассылку всего института или отдельных кафедр и получайте уведомления об изменениях в институте</li>
+            <li class="w-[20%] mt-[5%]">
+                @if(!Auth::check() || !$subscription)
+                    <form method="POST" action="{{ route('subscription.full') }}">
+                        @csrf
+                        @method('put')
+                        <button type="submit" class="text-orange-400 underline underline-offset-4">Подпишитесь</button>
+                        на рассылку всего института или отдельных кафедр и получайте уведомления об изменениях в институте
+                    </form>
+                @else
+                    Вы подписаны на рассылку всего института
+                @endif
+            </li>
             <li class="w-[5%] mt-[10%] text-orange-600 uppercase text-2xl list-none">А<br>так<br>же</li>
             <li class="w-[20%] mt-[12%]">Отправьтесь в небольшое путешествие по всему институту</li>
             <li class="w-[5%] mt-[8%] list-none text-orange-600 uppercase text-2xl">Или</li>
