@@ -15,6 +15,7 @@
     >{{ __('Удалить') }}</x-danger-button>
 
     <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
+        @if(!Auth::user()->isAdmin())
         <form method="post" action="{{ route('profile.destroy') }}" class="p-6">
             @csrf
             @method('delete')
@@ -51,5 +52,13 @@
                 </x-danger-button>
             </div>
         </form>
+        @else
+            <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100 p-6 text-center">
+                {{ __('Нельзя удалить учётную запись системного администратора') }}
+                <x-secondary-button x-on:click="$dispatch('close')" class="mt-6">
+                    {{ __('Отмена') }}
+                </x-secondary-button>
+            </h2>
+        @endif
     </x-modal>
 </section>
