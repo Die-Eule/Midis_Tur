@@ -17,7 +17,8 @@ return new class extends Migration
             $table->foreignId('level_id')->index();
             $table->foreignId('department_id')->index();
             $table->timestamps();
-        });
+            $table->unique(['level_id', 'department_id']);
+    });
     }
 
     /**
