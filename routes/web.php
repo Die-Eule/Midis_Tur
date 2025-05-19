@@ -26,6 +26,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile/subscription/{id}', [ProfileController::class, 'unsubscribe'])->name('subscription.delete');
 
     Route::patch('/d2', [DirectionController::class, 'update'])->name('dashboard2.update');
+    Route::put('/d6/{id}', [PhotoController::class, 'add'])->name('dashboard6.upload');
+    Route::delete('/d6', [PhotoController::class, 'remove'])->name('dashboard6.remove');
 });
 
 require __DIR__.'/auth.php';
