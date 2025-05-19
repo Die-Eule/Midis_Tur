@@ -11,7 +11,7 @@
             <p>{{$department->name}}</p>
         </div>
 
-        <div class="xl:columns-2 mt-14">
+        <div class="xl:columns-2 mt-14 select-none">
             @if(Auth::check() && Auth::user()->isAdmin())
                 <div class="w-[500px] h-[320px] shadow-lg rounded-xl bg-white mb-10 mx-6 flex justify-center items-center cursor-pointer break-inside-avoid-column"
                     x-on:click.prevent="$dispatch('open-modal', 'add-photo')">
@@ -19,16 +19,24 @@
                 </div>
             @endif
             @foreach($gallery as $item)
-                <img src="{{ Vite::asset('resources/images/'.$item->path) }}" alt="" id="{{$loop->index}}"
-                    class="w-[500px] h-[320px] shadow-lg rounded-xl object-cover mb-10 mx-6"
-                    x-init="collection[{{$loop->index}}]='{{ Vite::asset('resources/images/'.$item->path) }}'"
-                    x-on:click.prevent="selected=$el.id; $dispatch('open-modal', 'gallery')">
+                <div class="relative w-[500px] h-[320px] mb-10 mx-6 cursor-pointer">
+                    @if(Auth::check() && Auth::user()->isAdmin())
+                        <div class="absolute w-[500px] h-[320px] flex justify-center items-center bg-black/50 opacity-0 hover:opacity-100 duration-500 rounded-xl"
+                            id="{{$item->id}}" x-on:click.prevent.stop="selected=$el.id; $dispatch('open-modal', 'del-photo')">
+                            <p class="text-5xl font-medium text-orange-500">&#128465;</p>
+                        </div>
+                    @endif
+                    <img src="{{ Vite::asset($item->path) }}" alt="" id="{{$loop->index}}"
+                        class="w-[500px] h-[320px] rounded-xl object-cover"
+                        x-init="collection[{{$loop->index}}]='{{ Vite::asset($item->path) }}'"
+                        x-on:click.prevent.stop="selected=$el.id; $dispatch('open-modal', 'gallery')">
+                </div>
             @endforeach
         </div>
 
         @if(Auth::check() && Auth::user()->isAdmin())
 
-            <x-modal-viz name="add-photo" maxWidth="2xl" :bg=false>
+            <x-modal name="add-photo" maxWidth="2xl" :bg=false>
                 <form enctype="multipart/form-data" method="post" action="{{ route('dashboard6.upload', $department->id) }}"
                         class="flex flex-col items-start p-5 gap-3" x-data="{ fileName: '' }">
                     @csrf
@@ -37,26 +45,39 @@
                         <x-secondary-button x-on:click.prevent.stop="$refs.browse.click()">{{ __('Выбрать изображение') }}</x-secondary-button>
                         <p x-text="fileName" class="w-full h-9 p-1 border rounded-sm shadow-sm bg-gray-100"></p>
                     </div>
-                    <input required type="file" name="path" class="hidden" x-ref="browse" x-on:change="fileName=$refs.browse.value.split(/\\|\//).pop()">
+                    <input required type="file" name="new_photo" class="hidden" x-ref="browse" x-on:change="fileName=$refs.browse.value.split(/\\|\//).pop()">
                     <div class="w-full flex justify-between items-center">
                         <x-secondary-button x-on:click.prevent.stop="$dispatch('close')">{{ __('Отмена') }}</x-secondary-button>
                         <x-primary-button>{{ __('Загрузить') }}</x-primary-button>
                     </div>
                 </form> 
-            </x-modal-viz>
+            </x-modal>
 
-            <x-modal-viz name="del-photo" maxWidth="7xl">
-            </x-modal-viz>
+            <x-modal name="del-photo" maxWidth="lg" :bg=false>
+                <form method="post" action="{{ route('dashboard6.remove') }}"
+                        class="flex flex-col items-center p-10 gap-5">
+                    @csrf
+                    @method('delete')
+                    <input name="photo_id" type="hidden" :value="selected">
+                    <p class="text-center">Вы уверены, что хотите удалить данное изображение из списка?</p>
+                    <div class="w-[45%] flex justify-between items-center">
+                        <button class="w-20 rounded-2xl py-4 bg-orange-600 inline-flex justify-center items-center px-4 border border-transparent font-semibold text-xs text-white tracking-widest hover:bg-gray-200 hover:text-orange-600 focus:bg-gray-700 transition ease-in-out duration-150"
+                            type="submit">{{ __('Да') }}</button>
+                        <button class="w-20 rounded-2xl py-4 bg-orange-600 inline-flex justify-center items-center px-4 border border-transparent font-semibold text-xs text-white tracking-widest hover:bg-gray-200 hover:text-orange-600 focus:bg-gray-700 transition ease-in-out duration-150"
+                            x-on:click.prevent.stop="$dispatch('close')">{{ __('Нет') }}</button>
+                    </div>
+                </form> 
+            </x-modal>
 
         @else
 
             <x-modal-viz name="gallery" maxWidth="7xl">
-                <div class="flex justify-center items-center min-h-[95vh]">
-                    <div class="w-[20px]" x-on:click="selected > 0 ? selected-- : null">
+                <div class="flex justify-between items-center min-h-[95vh] px-5 select-none">
+                    <div class="w-[20px] cursor-pointer" x-on:click="selected > 0 ? selected-- : null">
                         <img src="{{ Vite::asset('resources/images/arrow.svg') }}" class="hover:w-[20px]" alt="">
                     </div>
                     <img :src="collection[selected]" alt="" class="mx-5 sm:max-w-6xl max-h-[94vh]">
-                    <div class="w-[20px]" x-on:click="selected < {{ $gallery->count() - 1 }} ? selected++ : null">
+                    <div class="w-[20px] cursor-pointer" x-on:click="selected < {{ $gallery->count() - 1 }} ? selected++ : null">
                         <img src="{{ Vite::asset('resources/images/arrow.svg') }}" class="hover:w-[20px] -scale-x-100" alt="">
                     </div>
                 </div>
