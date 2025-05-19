@@ -15,15 +15,15 @@
                     Вы подписаны на рассылку всего института
                 @endif
             </li>
-            <li class="w-[5%] mt-[10%] text-orange-600 uppercase text-2xl list-none">А<br>так<br>же</li>
+            {{-- <li class="w-[5%] mt-[10%] text-orange-600 uppercase text-2xl list-none">А<br>так<br>же</li> --}}
             <li class="w-[20%] mt-[12%]">
                 <div class='flex-col justify-center'>
                     Отправьтесь в небольшое путешествие по всему институту
                     <div class="w-full"><img src="{{ Vite::asset('resources/images/doublearrow.png') }}" alt="" class="w-30 h-20 mx-auto"></div>
                 </div>
             </li>
-            <li class="w-[5%] mt-[8%] list-none text-orange-600 uppercase text-2xl">Или</li>
-            <li class="w-[20%] mt-[5%]">Посмотрите свой путь исходя из выбранной вами специальности</li>
+            {{-- <li class="w-[5%] mt-[8%] list-none text-orange-600 uppercase text-2xl">Или</li> --}}
+            <li class="w-[25%] mt-[5%]">Посмотрите свой путь исходя из выбранной вами специальности</li>
             <li class="w-[20%] mt-[7%] list-none">
                 <div>
                     <img src="{{ Vite::asset('resources/images/arrow_bg.svg') }}" alt="" class="w-40 h-40 mb-14">
@@ -31,9 +31,6 @@
                 </div>
             </li>
            </ul>
-        <!-- <a class="text-9xl text-center text-stone-50" href="{{ route('dashboard2') }}" class="flex items-center">
-            <p>Ссылка</p>
-        </a> -->
     </div>
     <div class="w-full h-[641px] flex text-stone-50 [text-shadow:_0_4px_4px_rgb(0_0_0_/_0.9)]">
         <div class="border-stone-50 border-2 w-[50%] bg-[url('../images/background_math.png')] flex flex-col justify-center items-center">
