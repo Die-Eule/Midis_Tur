@@ -13,10 +13,18 @@
 
         <div class="grid grid-cols-1 xl:grid-cols-2 gap-4 mt-14 select-none">
             @ifadmin(Auth::user())
-                <div class="w-[500px] h-[320px] shadow-lg rounded-xl bg-white mb-10 mx-6 flex justify-center items-center cursor-pointer break-inside-avoid-column"
-                    x-on:click.prevent="$dispatch('open-modal', 'add-photo')">
-                    <img src="{{ Vite::asset('resources/images/plus_sign.svg') }}" alt="">
-                </div>
+                <form enctype="multipart/form-data" method="post" action="{{ route('dashboard6.upload', $department->id) }}"
+                        >
+                    @csrf
+                    @method('put')
+                    <div class="w-[500px] h-[320px] shadow-lg rounded-xl bg-white mb-10 mx-6 flex justify-center items-center cursor-pointer"
+                            x-on:click.prevent.stop="$refs.browse.click()">
+                        <img src="{{ Vite::asset('resources/images/plus_sign.svg') }}" alt="">
+                    </div>
+                    <input type="file" accept="image/*" name="new_photo" class="hidden" x-ref="browse"
+                        x-on:change="$refs.submit.click()">
+                    <button type="submit" class="hidden" x-ref="submit"></button>
+                </form> 
             @endifadmin
             @foreach($gallery as $item)
                 <div class="relative w-[500px] h-[320px] mb-10 mx-6 cursor-pointer">
@@ -35,20 +43,6 @@
         </div>
 
         @ifadmin(Auth::user())
-
-            <x-modal name="add-photo" maxWidth="xl">
-                <form enctype="multipart/form-data" method="post" action="{{ route('dashboard6.upload', $department->id) }}"
-                        x-data="{ photo: '' }" x-init="photo = '{{ Vite::asset('resources/images/plus_sign.svg') }}'"
-                        class="flex flex-col items-start p-10 gap-3" x-data="{ fileName: '' }">
-                    @csrf
-                    @method('put')
-                    <x-photo-input width="w-[500px]" hight="h-[320px]" initial="photo" newMode="true"/>
-                    <div class="w-full flex justify-between items-center">
-                        <x-secondary-button x-on:click.prevent.stop="$dispatch('close')">{{ __('Отмена') }}</x-secondary-button>
-                        <x-primary-button>{{ __('Загрузить') }}</x-primary-button>
-                    </div>
-                </form> 
-            </x-modal>
 
             <x-modal name="del-photo" maxWidth="lg">
                 <form method="post" action="{{ route('dashboard6.remove') }}"
