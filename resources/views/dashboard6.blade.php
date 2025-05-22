@@ -11,7 +11,7 @@
             <p>{{$department->name}}</p>
         </div>
 
-        <div class="xl:columns-2 mt-14 select-none">
+        <div class="grid grid-cols-1 xl:grid-cols-2 gap-4 mt-14 select-none">
             @ifadmin(Auth::user())
                 <div class="w-[500px] h-[320px] shadow-lg rounded-xl bg-white mb-10 mx-6 flex justify-center items-center cursor-pointer break-inside-avoid-column"
                     x-on:click.prevent="$dispatch('open-modal', 'add-photo')">
@@ -28,7 +28,7 @@
                     @endifadmin
                     <img src="{{ Vite::asset($item->path) }}" alt="" id="{{$loop->index}}"
                         class="w-[500px] h-[320px] rounded-xl object-cover"
-                        x-init="collection[{{$loop->index}}]='{{ Vite::asset($item->path) }}'"
+                        x-init="collection[{{$loop->index}}]=$el.src"
                         x-on:click.prevent.stop="selected=$el.id; $dispatch('open-modal', 'gallery')">
                 </div>
             @endforeach
@@ -36,16 +36,13 @@
 
         @ifadmin(Auth::user())
 
-            <x-modal name="add-photo" maxWidth="2xl" :bg=false>
+            <x-modal name="add-photo" maxWidth="xl">
                 <form enctype="multipart/form-data" method="post" action="{{ route('dashboard6.upload', $department->id) }}"
-                        class="flex flex-col items-start p-5 gap-3" x-data="{ fileName: '' }">
+                        x-data="{ photo: '' }" x-init="photo = '{{ Vite::asset('resources/images/plus_sign.svg') }}'"
+                        class="flex flex-col items-start p-10 gap-3" x-data="{ fileName: '' }">
                     @csrf
                     @method('put')
-                    <div class="w-full flex items-center gap-5">
-                        <x-secondary-button x-on:click.prevent.stop="$refs.browse.click()">{{ __('Выбрать изображение') }}</x-secondary-button>
-                        <p x-text="fileName" class="w-full h-9 p-1 border rounded-sm shadow-sm bg-gray-100"></p>
-                    </div>
-                    <input required type="file" name="new_photo" class="hidden" x-ref="browse" x-on:change="fileName=$refs.browse.value.split(/\\|\//).pop()">
+                    <x-photo-input width="w-[500px]" hight="h-[320px]" initial="photo" newMode="true"/>
                     <div class="w-full flex justify-between items-center">
                         <x-secondary-button x-on:click.prevent.stop="$dispatch('close')">{{ __('Отмена') }}</x-secondary-button>
                         <x-primary-button>{{ __('Загрузить') }}</x-primary-button>
@@ -53,7 +50,7 @@
                 </form> 
             </x-modal>
 
-            <x-modal name="del-photo" maxWidth="lg" :bg=false>
+            <x-modal name="del-photo" maxWidth="lg">
                 <form method="post" action="{{ route('dashboard6.remove') }}"
                         class="flex flex-col items-center p-10 gap-5">
                     @csrf

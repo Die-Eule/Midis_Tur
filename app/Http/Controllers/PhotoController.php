@@ -13,7 +13,7 @@ class PhotoController extends Controller
     
     public function index(string $id)
     {
-        $gallery = Photo::where('department_id', $id)->where('project_id', 0)->get();
+        $gallery = Photo::where('department_id', $id)->where('project_id', 0)->orderBy('updated_at', 'desc')->get();
         $department = Department::where('id', $id)->first();
         return view('dashboard6', compact('department', 'gallery'));
     }
