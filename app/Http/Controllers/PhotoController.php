@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 use App\Models\Photo;
 use App\Models\Department;
+use App\Traits\Common;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class PhotoController extends Controller
 {
+    use Common;
+    
     public function index(string $id)
     {
         $gallery = Photo::where('department_id', $id)->where('project_id', 0)->get();
@@ -30,17 +33,11 @@ class PhotoController extends Controller
     public function remove(Request $req)
     {
         $photo = Photo::where('id', $req->input('photo_id'))->first();
-        $path = array_reduce(explode('/', $photo->path), function($carry, $item) {
-            if ($carry) {
-                $carry = $carry.'/'.$item;
-            } else if (strcmp($item, 'dep') === 0) {
-                $carry = $item;
-            }
-            return $carry;
-        });
+        if ($photo) {
+            $this->deleteFile($photo->path);
+            $photo->delete();
+        }
 
-        Storage::delete($path);
-        $photo->delete();
         return redirect()->back();
     }
 }
