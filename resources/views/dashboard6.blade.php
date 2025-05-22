@@ -12,20 +12,20 @@
         </div>
 
         <div class="xl:columns-2 mt-14 select-none">
-            @if(Auth::check() && Auth::user()->isAdmin())
+            @ifadmin(Auth::user())
                 <div class="w-[500px] h-[320px] shadow-lg rounded-xl bg-white mb-10 mx-6 flex justify-center items-center cursor-pointer break-inside-avoid-column"
                     x-on:click.prevent="$dispatch('open-modal', 'add-photo')">
                     <img src="{{ Vite::asset('resources/images/plus_sign.svg') }}" alt="">
                 </div>
-            @endif
+            @endifadmin
             @foreach($gallery as $item)
                 <div class="relative w-[500px] h-[320px] mb-10 mx-6 cursor-pointer">
-                    @if(Auth::check() && Auth::user()->isAdmin())
+                    @ifadmin(Auth::user())
                         <div class="absolute w-[500px] h-[320px] flex justify-center items-center bg-black/50 opacity-0 hover:opacity-100 duration-500 rounded-xl"
                             id="{{$item->id}}" x-on:click.prevent.stop="selected=$el.id; $dispatch('open-modal', 'del-photo')">
                             <p class="text-5xl font-medium text-orange-500">&#128465;</p>
                         </div>
-                    @endif
+                    @endifadmin
                     <img src="{{ Vite::asset($item->path) }}" alt="" id="{{$loop->index}}"
                         class="w-[500px] h-[320px] rounded-xl object-cover"
                         x-init="collection[{{$loop->index}}]='{{ Vite::asset($item->path) }}'"
@@ -34,7 +34,7 @@
             @endforeach
         </div>
 
-        @if(Auth::check() && Auth::user()->isAdmin())
+        @ifadmin(Auth::user())
 
             <x-modal name="add-photo" maxWidth="2xl" :bg=false>
                 <form enctype="multipart/form-data" method="post" action="{{ route('dashboard6.upload', $department->id) }}"
@@ -83,6 +83,6 @@
                 </div>
             </x-modal-viz>
         
-        @endif
+        @endifadmin
 
 </x-app-layout>

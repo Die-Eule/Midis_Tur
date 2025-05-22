@@ -43,7 +43,7 @@
             @endforeach
         </div>
 
-        @if(Auth::check() && Auth::user()->isAdmin())
+        @ifadmin(Auth::user())
         <x-modal name="change-directions" focusable>
             <form method="post" action="{{ route('dashboard2.update') }}" class="p-6 w-full">
                 @csrf
@@ -74,7 +74,7 @@
 
             </form>
         </x-modal>
-        @endif
+        @endifadmin
         
     </div>
 

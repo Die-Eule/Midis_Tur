@@ -15,17 +15,19 @@
             <p>{{$department->name}}</p>
         </div>
 
-        <script>
-            var collection = {{ Js::from($staff) }};
-        </script>
+        @ifadmin(Auth::user())
+            <script>
+                var collection = {{ Js::from($staff) }};
+            </script>
+        @endifadmin
 
         <div class="flex flex-wrap justify-between w-[450px] xl:w-[900px] mt-14">
-            @if(Auth::check() && Auth::user()->isAdmin())
+            @ifadmin(Auth::user())
                 <div class="w-[375px] h-[520px] shadow-lg rounded-xl bg-white mb-8 flex justify-center items-center cursor-pointer"
                     x-on:click.prevent="$dispatch('open-modal', 'add-person')">
                     <img src="{{ Vite::asset('resources/images/plus_sign.svg') }}" alt="" x-init="photos[{{$staff->count()}}]=$el.src">
                 </div>
-            @endif
+            @endifadmin
             @foreach($staff as $persone)
             <div class="mb-8 cursor-pointer" x-on:click.prevent="selected={{$loop->index}}; $dispatch('open-modal', 'person')">
                 <img src="{{ Vite::asset($persone->pic) }}" alt="" class="w-[375px] h-[520px] shadow-lg rounded-xl object-cover"
@@ -36,7 +38,7 @@
             @endforeach
         </div>
 
-        @if(Auth::check() && Auth::user()->isAdmin())
+        @ifadmin(Auth::user())
 
             <x-modal-viz name="person" maxWidth="4xl" bg="bg-white">
                 <form enctype="multipart/form-data" method="post" action="{{ route('dashboard4.update') }}" class="p-5">
@@ -112,7 +114,7 @@
                 </form> 
             </x-modal>
 
-        @endif
+        @endifadmin
     </div>
 
 </x-app-layout>
