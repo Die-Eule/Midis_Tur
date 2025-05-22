@@ -26,6 +26,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile/subscription/{id}', [ProfileController::class, 'unsubscribe'])->name('subscription.delete');
 
     Route::patch('/d2', [DirectionController::class, 'update'])->name('dashboard2.update');
+
+    Route::patch('/d4', [TeacherController::class, 'update'])->name('dashboard4.update');
+    Route::put('/d4/{id}', [TeacherController::class, 'add'])->name('dashboard4.add');
+    Route::delete('/d4', [TeacherController::class, 'remove'])->name('dashboard4.remove');
+
     Route::put('/d6/{id}', [PhotoController::class, 'add'])->name('dashboard6.upload');
     Route::delete('/d6', [PhotoController::class, 'remove'])->name('dashboard6.remove');
 });
