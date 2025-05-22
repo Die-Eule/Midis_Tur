@@ -60,7 +60,7 @@
                         <div class="flex gap-1">
                             <input :name="index" type="text" :value="value" autocomplete="off"
                                 class="block w-full border-black-300 hover:border-orange-300 focus:border-orange-600 focus:ring-orange-500 rounded-md shadow-sm">
-                            <x-secondary-button x-on:click="delete allSpecs[selected][index]" class="text-2xl/4">&#128465;</x-secondary-button>
+                            <x-secondary-button x-on:click="delete allSpecs[selected][index]"><span class="text-2xl/4 text-red-800">&#128465;</span></x-secondary-button>
                         </div>
                     </template>
 
