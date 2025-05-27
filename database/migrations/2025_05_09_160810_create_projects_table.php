@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
-            $table->string('description');
+            $table->string('author');
+            $table->unsignedTinyInteger('grade');
+            $table->unsignedTinyInteger('year');
             $table->string('url')->nullable();
             $table->foreignId('department_id')->index();
             $table->timestamps();
