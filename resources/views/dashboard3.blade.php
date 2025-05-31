@@ -46,7 +46,14 @@
         </div>
 
         <x-modal-viz name="video-tour" maxWidth="7xl" shift>
-            <video controls>
+            <video controls
+                    x-init="$watch('show', value => {
+                        if (value) {
+                            $el.play();
+                        } else {
+                            $el.pause();
+                            $el.currentTime = 0;
+                        } })">
                 <source src="{{ Vite::asset('resources/video/'.$department->video) }}" type="video/mp4">
                 Ваш браузер не поддерживает встроенные видео.
             </video>

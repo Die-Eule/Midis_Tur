@@ -17,8 +17,6 @@ $maxWidth = [
     '4xl' => 'sm:max-w-4xl',
     '7xl' => 'sm:max-w-7xl',
 ][$maxWidth];
-
-$shift = $shift ? 'sm:mt-20' : '';
 @endphp
 
 <div
@@ -42,17 +40,8 @@ $shift = $shift ? 'sm:mt-20' : '';
         if (value) {
             document.body.classList.add('overflow-y-hidden');
             {{ $attributes->has('focusable') ? 'setTimeout(() => firstFocusable().focus(), 100)' : '' }}
-            $videoPlayer = $el.querySelector('video');
-            if ($videoPlayer) {
-                $videoPlayer.play();
-            }
         } else {
             document.body.classList.remove('overflow-y-hidden');
-            $videoPlayer = $el.querySelector('video');
-            if ($videoPlayer) {
-                $videoPlayer.pause();
-                $videoPlayer.currentTime = 0;
-            }
         }
     })"
     x-on:open-modal.window="$event.detail == '{{ $name }}' ? show = true : null"
@@ -81,7 +70,7 @@ $shift = $shift ? 'sm:mt-20' : '';
 
     <div
         x-show="show"
-        class="mb-6 {{ $bg }} rounded-lg overflow-hidden transform transition-all sm:w-full {{ $maxWidth }} sm:mx-auto {{ $shift }}"
+        class="mb-6 {{ $bg }} rounded-lg overflow-hidden transform transition-all sm:w-full {{ $maxWidth }} sm:mx-auto {{ $shift ? 'sm:mt-20' : '' }}"
         x-transition:enter="ease-out duration-300"
         x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
         x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
