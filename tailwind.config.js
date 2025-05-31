@@ -18,6 +18,10 @@ export default {
                 kslab: ['Kelly Slab'],
             },
         },
+        screens: {
+            'xs': '30rem',
+            ...defaultTheme.screens,
+        },
     },
 
     plugins: [

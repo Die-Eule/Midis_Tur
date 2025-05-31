@@ -17,24 +17,27 @@ $option = [
 ][$option];
 @endphp
 
-<div class="max-w-full p-10 {{$option['gap']}} sm:px-6 lg:px-8 flex justify-center items-center max-h-[64px] {{$option['color']}}">
+<div class="max-w-full {{$option['gap']}} px-6 lg:px-8 flex justify-between xs:justify-center items-center {{$option['color']}}">
 
     <!-- Logo -->
-    <div class="shrink-0 flex items-center min-w-[20rem]">
+    <div class="shrink-0 flex flex-col xs:flex-row xs:items-center xs:min-w-[5rem] lg:min-w-[20rem] justify-between min-h-[90px]">
         <a href="{{ route('dashboard') }}" class="flex items-center">
             <img src="{{ Vite::asset('resources/images/logo.png') }}" alt="logo" class="w-10">
-            <p class="w-64 ml-6 font-medium">Международный институт дизайна и сервиса</p>
+            <p class="w-64 ml-6 font-medium hidden md:block">Международный Институт Дизайна и Сервиса</p>
         </a>
+        <p class="xs:hidden">©&nbsp;2025</p>
     </div>
 
-    <div class="flex items-center min-w-[20rem] lg:mx-20">
-        <img src="{{ Vite::asset('resources/images/'.$option['logo1']) }}" alt="telegram-icon" class="w-10">
-        <img src="{{ Vite::asset('resources/images/'.$option['logo2']) }}" alt="vk-icon" class="w-10">
-        <div class="ml-8 font-medium">
+    <div class="flex flex-col xs:flex-row items-center xs:min-w-[20rem] lg:mx-20">
+        <div class="w-full xs:w-auto flex justify-around">
+            <img src="{{ Vite::asset('resources/images/'.$option['logo1']) }}" alt="telegram-icon" class="w-10">
+            <img src="{{ Vite::asset('resources/images/'.$option['logo2']) }}" alt="vk-icon" class="w-10">
+        </div>
+        <div class="xs:ml-8 font-medium">
             <p>+7 (351) 202-00-73</p>
             <p>info@midis.ru</p>
         </div>
     </div>
 
-    <p>© 2025</p>
+    <p class="hidden xs:block">©&nbsp;2025</p>
 </div>

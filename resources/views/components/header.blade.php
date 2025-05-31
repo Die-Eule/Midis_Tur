@@ -19,17 +19,17 @@ $option = [
     <!-- Primary Navigation Menu -->
     <div class="max-w-full px-4 sm:px-6 lg:px-8 flex justify-between pt-4 max-h-[64px]">
 
-        <div class="min-w-[12%]"></div>
+        <div class="hidden sm:block min-w-[12%]"></div>
 
         <!-- Logo -->
-        <div class="shrink-0 flex items-center min-w-[20rem]">
+        <div class="shrink-0 flex items-center min-w-[5rem] lg:min-w-[20rem]">
             <a href="{{ route('dashboard') }}" class="flex items-center">
                 <img src="{{ Vite::asset('resources/images/logo.png') }}" alt="" class="w-10">
-                <p class="w-64 ml-6 font-medium text-{{$option['color']}} [text-shadow:_0_4px_4px_rgb(0_0_0_/_0.4)]">Международный институт дизайна и сервиса</p>
+                <p class="w-64 ml-6 font-medium text-{{$option['color']}} [text-shadow:_0_4px_4px_rgb(0_0_0_/_0.4)] hidden lg:block">Международный Институт Дизайна и Сервиса</p>
             </a>
         </div>
 
-        <div class="flex items-center min-w-[20rem]">
+        <div class="hidden xs:flex items-center min-w-[20rem]">
             <img src="{{ Vite::asset('resources/images/'.$option['logo1']) }}" alt="telegram-icon" class="w-10">
             <img src="{{ Vite::asset('resources/images/'.$option['logo2']) }}" alt="vk-icon" class="w-10">
             <div class="ml-8 font-medium">
@@ -40,7 +40,7 @@ $option = [
 
         @if(Auth::check())
         <!-- Settings Dropdown -->
-        <div class="hidden sm:flex sm:items-center sm:ms-6 min-w-[12%] justify-end">
+        <div class="flex items-center sm:ms-6 min-w-[12%] justify-end">
             <x-dropdown align="right" width="48">
                 <x-slot name="trigger">
                     <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
