@@ -31,7 +31,7 @@ $shift = $shift ? 'sm:mt-20' : '';
                 // All non-disabled elements...
                 .filter(el => ! el.hasAttribute('disabled'))
         },
-        firstFocusable() { return this.focusables()[0] },
+        firstFocusable() { return this.focusables().filter(el => el.hasAttribute('autofocus'))[0] || this.focusables()[0] },
         lastFocusable() { return this.focusables().slice(-1)[0] },
         nextFocusable() { return this.focusables()[this.nextFocusableIndex()] || this.firstFocusable() },
         prevFocusable() { return this.focusables()[this.prevFocusableIndex()] || this.lastFocusable() },

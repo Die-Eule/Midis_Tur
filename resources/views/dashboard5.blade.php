@@ -21,7 +21,7 @@
             @ifadmin(Auth::user())
                 <div class="w-[500px] h-[320px] shadow-lg rounded-xl bg-white mb-10 mx-6 flex justify-center items-center cursor-pointer"
                     x-init="titles['new']={path:placeholder,alignment:'object-none'}; collection['new']=[]; projects['new']={autor:'',grade:'1',year:'1'};"
-                    x-on:click.prevent="selected='new'; $dispatch('open-modal', 'project')">
+                    x-on:click.stop="selected='new'; $dispatch('open-modal', 'project')">
                     <img :src="placeholder" alt="">
                 </div>
             @endifadmin
@@ -34,7 +34,7 @@
                                 projects[{{$proj->id}}]={{ Js::from($proj) }};
                                 forDelete[{{$proj->id}}]=[];"
             @endifadmin
-                        x-on:click.prevent="selected=$el.id; slide=0; $dispatch('open-modal', 'project')">
+                        x-on:click.stop="selected=$el.id; slide=0; $dispatch('open-modal', 'project')">
                     <p class="w-[500px] mt-2 mx-6">Автор работы: {{$proj->author}}, {{$proj->year}} курс {{$proj->grade == 1 ? 'колледжа' : 'института'}}</p>
                 </div>
             @endforeach
@@ -85,15 +85,14 @@
                                 </fieldset>
                                 <div>
                                     <label for="author">Автор</label>
-                                    <input id="author" name="author" type="text" :value="projects[selected].author" required autocomplete="off"
-                                        class="block w-full border-black-300 hover:border-orange-300 focus:border-orange-600 focus:ring-orange-500 rounded-xl shadow-sm bg-gray-100">
+                                    <input id="author" name="author" type="text" :value="projects[selected].author" placeholder="Фамилия Имя" required autofocus autocomplete="off"
+                                        class="block w-full border-black-300 hover:border-orange-300 focus:border-orange-600 focus:ring-orange-500 rounded-xl shadow-sm bg-gray-100 placeholder:text-gray-500 placeholder:italic">
                                 </div>
                             </div>
                         </div>
-                        <div class="self-end">
-                            <button class="text-sm text-orange-600 underline mb-2 w-full text-end">Добавить ещё фото</button>
-                            <div class="flex flex-row-reverse justify-start h-[40px]"
-                                    x-effect="dop_count>=7 ? $refs.plus_button.classList.add('hidden') : $refs.plus_button.classList.remove('hidden');">
+                        <div class="self-end w-full">
+                            <p class="text-md text-orange-600 mb-2 w-full text-end border-b border-gray-500">Дополнительные фото</p>
+                            <div class="flex flex-row justify-end h-[40px]" :class="{ 'mr-2': dop_count >= 7 }">
                                 <template x-for="(value, index) in forDelete[selected]" :key="index">
                                     <div class="">
                                         <input type="hidden" :name="'del_photo'+index" :value="value">
@@ -101,20 +100,22 @@
                                 </template>
                                 <template x-for="(value, index) in collection[selected]" :key="index">
                                     <div class="">
-                                        <img class="w-[40px] h-[40px] ml-2 object-cover cursor-pointer" :src="value['path']" alt="" :id="'src'+index"
+                                        <img :src="value['path']" alt="" :id="'src'+index"
+                                            class="w-[40px] h-[40px] mr-2 object-cover cursor-pointer hidden" :class="{'hidden': collection[selected][index]['hidden']}"
+                                            x-init="if ('id' in value) { collection[selected][index]['hidden'] = 0; }"
                                             x-on:click="$dispatch('pic-to-delete', collection[selected][index]['path']); to_del=index; $dispatch('open-modal', 'del-dop');">
                                         <input type="file" accept="image/*" :name="'dop_photo'+index" class="hidden" :id="'inp'+index"
                                             x-on:change="collection[selected][curr_inp]['path'] = URL.createObjectURL($event.target.files[0]);
+                                                         collection[selected][curr_inp]['hidden'] = 0;
                                                          $el.previousElementSibling.src=collection[selected][curr_inp]['path'];
-                                                         $el.previousElementSibling.classList.remove('hidden');
                                                          dop_count++;">
                                     </div>
                                 </template>
-                                <button class="rounded-xl shadow-lg ml-2" x-ref="plus_button" x-on:click.prevent.stop="
+                                <button class="rounded-xl shadow-lg ml-4" x-ref="plus_button" x-show="dop_count < 7" x-on:click.prevent.stop="
                                         curr_inp=collection[selected].length;
                                         collection[selected][curr_inp]={'path': placeholder};
+                                        collection[selected][curr_inp]['hidden'] = 1;
                                         await $nextTick();
-                                        document.getElementById('src'+curr_inp).classList.add('hidden');
                                         document.getElementById('inp'+curr_inp).click();">
                                     <img class="w-[40px] h-[40px] object-none scale-50 hover:scale-75" :src="placeholder" alt="">
                                 </button>
@@ -124,7 +125,7 @@
                             <button class="rounded-2xl py-3 bg-orange-600 inline-flex justify-center items-center px-4 border border-transparent text-white tracking-widest hover:bg-gray-200 hover:text-orange-600 focus:bg-gray-700 transition ease-in-out duration-150"
                                 x-on:click.prevent.stop="$dispatch('close'); $dispatch('clear-form')">{{ __('Отмена') }}</button>
                             <button class="rounded-2xl py-3 bg-orange-600 inline-flex justify-center items-center px-4 border border-transparent text-white tracking-widest hover:bg-gray-200 hover:text-orange-600 focus:bg-gray-700 transition ease-in-out duration-150"
-                                type="submit">{{ __('Добавить') }}</button>
+                                type="submit" x-text="selected=='new' ? 'Добавить' : 'Изменить'"></button>
                             <p x-show="selected!='new'" class="text-5xl font-medium text-orange-600 ml-5 cursor-pointer" x-on:click.prevent.stop="$dispatch('open-modal', 'del-project')">&#128465;</p>
                         </div>
                     </div>
