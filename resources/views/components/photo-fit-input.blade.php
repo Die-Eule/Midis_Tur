@@ -15,6 +15,6 @@
             else if ($event.target.naturalWidth < $event.target.naturalHeight) { $el.className = classes + 'object-contain' }
             else { $el.className = classes + 'object-cover' }"
         x-on:click.prevent.stop="$refs.browse.click()" x-ref="preview">
-    <input type="file" accept="image/*" name="{{$name}}" class="hidden" x-ref="browse" :required="{{$newMode}}"
+    <input type="file" accept="image/*" name="{{$name}}" class="hidden" x-ref="browse"
         x-on:change="$refs.preview.src=URL.createObjectURL($event.target.files[0]);">
 </div>

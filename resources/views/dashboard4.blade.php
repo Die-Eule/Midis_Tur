@@ -25,7 +25,9 @@
             @ifadmin(Auth::user())
                 <div class="w-[375px] h-[520px] shadow-lg rounded-xl bg-white mb-8 flex justify-center items-center cursor-pointer"
                     x-on:click.prevent="$dispatch('open-modal', 'add-person')">
-                    <img src="{{ Vite::asset('resources/images/plus_sign.svg') }}" alt="" x-init="photos[{{$staff->count()}}]=$el.src">
+                    <img src="{{ Vite::asset('resources/images/plus_sign.svg') }}" alt=""
+                        x-init="photos[{{$staff->count()}}]=$el.src; collection[{{$staff->count()}}]={id: 0}; collection[{{$staff->count()}}].name='';
+                                collection[{{$staff->count()}}].surname=''; collection[{{$staff->count()}}].middlename=''">
                 </div>
             @endifadmin
             @foreach($staff as $persone)
@@ -40,8 +42,9 @@
 
         @ifadmin(Auth::user())
 
-            <x-modal-viz name="person" maxWidth="4xl" bg="bg-white">
-                <form enctype="multipart/form-data" method="post" action="{{ route('dashboard4.update') }}" class="p-5">
+            <x-modal-viz name="person" maxWidth="4xl" bg="bg-white" strict>
+                <form enctype="multipart/form-data" method="post" action="{{ route('dashboard4.update') }}" class="p-5"
+                        x-on:clear-form="old=selected; selected={{$staff->count()}}; selected=old">
                     @csrf
                     @method('patch')
                     <div class="w-full h-[520px] flex justify-between items-start gap-5">
@@ -61,7 +64,7 @@
                             </div>
                             <div class="w-full flex justify-end items-end gap-5">
                                 <button class="w-30 rounded-2xl py-4 bg-orange-600 inline-flex justify-center items-center px-4 border border-transparent text-white tracking-widest hover:bg-gray-200 hover:text-orange-600 focus:bg-gray-700 transition ease-in-out duration-150"
-                                    x-on:click.prevent.stop="$dispatch('close')">{{ __('Отмена') }}</button>
+                                    x-on:click.prevent.stop="$dispatch('close'); $dispatch('clear-form')">{{ __('Отмена') }}</button>
                                 <button class="w-30 rounded-2xl py-4 bg-orange-600 inline-flex justify-center items-center px-4 border border-transparent text-white tracking-widest hover:bg-gray-200 hover:text-orange-600 focus:bg-gray-700 transition ease-in-out duration-150"
                                     type="submit">{{ __('Изменить') }}</button>
                                 <p class="text-5xl font-medium text-orange-600 ml-5 cursor-pointer" x-on:click.prevent.stop="$dispatch('open-modal', 'del-person')">&#128465;</p>
@@ -71,8 +74,9 @@
                 </form> 
             </x-modal-viz>
 
-            <x-modal-viz name="add-person" maxWidth="4xl" bg="bg-white">
-                <form enctype="multipart/form-data" method="post" action="{{ route('dashboard4.add', $persone->department_id) }}" class="p-5">
+            <x-modal-viz name="add-person" maxWidth="4xl" bg="bg-white" strict>
+                <form enctype="multipart/form-data" method="post" action="{{ route('dashboard4.add', $persone->department_id) }}" class="p-5"
+                        x-on:clear-form="$el.reset(); $refs.preview.src=photos[{{$staff->count()}}];">
                     @csrf
                     @method('put')
                     <div class="w-full h-[520px] flex justify-between items-start gap-5">
@@ -89,7 +93,7 @@
                             </div>
                             <div class="w-full flex justify-end items-end gap-5">
                                 <button class="w-40 rounded-2xl py-4 bg-orange-600 inline-flex justify-center items-center px-4 border border-transparent text-white tracking-widest hover:bg-gray-200 hover:text-orange-600 focus:bg-gray-700 transition ease-in-out duration-150"
-                                    x-on:click.prevent.stop="$dispatch('close')">{{ __('Отмена') }}</button>
+                                    x-on:click.prevent.stop="$dispatch('close'); $dispatch('clear-form')">{{ __('Отмена') }}</button>
                                 <button class="w-40 rounded-2xl py-4 bg-orange-600 inline-flex justify-center items-center px-4 border border-transparent text-white tracking-widest hover:bg-gray-200 hover:text-orange-600 focus:bg-gray-700 transition ease-in-out duration-150"
                                     type="submit">{{ __('Добавить') }}</button>
                             </div>

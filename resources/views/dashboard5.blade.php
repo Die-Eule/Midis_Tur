@@ -30,7 +30,9 @@
                     <img src="{{ $gallery[$proj->id]->first()->path }}" alt="" id="{{$proj->id}}"
                         class="w-[500px] h-[320px] shadow-lg rounded-xl {{$gallery[$proj->id]->first()->alignment}} bg-stone-700 mb-3 mx-6"
             @ifadmin(Auth::user())
-                        x-init="titles[{{$proj->id}}]=collection[{{$proj->id}}].splice(0, 1)[0]; projects[{{$proj->id}}]={{ Js::from($proj) }}; forDelete[{{$proj->id}}]=[];"
+                        x-init="titles[{{$proj->id}}]=collection[{{$proj->id}}].splice(0, 1)[0];
+                                projects[{{$proj->id}}]={{ Js::from($proj) }};
+                                forDelete[{{$proj->id}}]=[];"
             @endifadmin
                         x-on:click.prevent="selected=$el.id; slide=0; $dispatch('open-modal', 'project')">
                     <p class="w-[500px] mt-2 mx-6">Автор работы: {{$proj->author}}, {{$proj->year}} курс {{$proj->grade == 1 ? 'колледжа' : 'института'}}</p>
@@ -39,15 +41,23 @@
         </div>
 
         @ifadmin(Auth::user())
-        <div x-data="{ curr_inp: 0, dop_count: collection[selected].length, to_del: 0 }"
-            x-init="console.log(collection); console.log(projects); console.log(titles);" {{-- debug - to remove --}}
+        <div x-data="{ curr_inp: 0, dop_count: 0, to_del: 0, backup: [] }"
             x-on:del-input="
                 if ('id' in collection[selected][to_del]) { forDelete[selected].push(collection[selected][to_del].id); }
                 collection[selected].splice(to_del, 1);
                 dop_count--;
                 to_del=0;">
-            <x-modal-viz name="project" maxWidth="md" bg="bg-white">
-                <form enctype="multipart/form-data" method="post" action="{{ route('dashboard5.add', $proj->department_id) }}" class="p-10">
+            <x-modal-viz name="project" maxWidth="md" bg="bg-white" focusable strict>
+                <form enctype="multipart/form-data" method="post" action="{{ route('dashboard5.add', $proj->department_id) }}" class="p-10 relative" x-data="{baloon: false}"
+                        x-on:submit.prevent="if (selected=='new' && $refs.browse.value=='') {baloon=true} else {$el.submit()}"
+                        x-on:clear-form="
+                            curr_inp=0; dop_count=0; dop_count[selected]=[]; forDelete[selected]=[];
+                            collection[selected]=[...backup];
+                            selected = (selected=='new') ? Object.keys(titles)[0] : 'new';"
+                        x-init="$watch('show', value => { if (value) {dop_count=collection[selected].length; backup=[...collection[selected]];} } )">
+                    <p x-show="baloon" class="absolute inset-x-[60px] top-[60px] text-lg text-red-500 text-center bg-gray-200 shadow-lg rounded-xl"  x-on:click.outside="baloon=false">
+                        Для карточки работы обязательно должна быть выбрана обложка!
+                    </p>
                     @csrf
                     @method('put')
                     <div class="w-full flex flex-col items-center gap-5">
@@ -112,7 +122,7 @@
                         </div>
                         <div class="w-full flex justify-end items-end gap-5 mt-5">
                             <button class="rounded-2xl py-3 bg-orange-600 inline-flex justify-center items-center px-4 border border-transparent text-white tracking-widest hover:bg-gray-200 hover:text-orange-600 focus:bg-gray-700 transition ease-in-out duration-150"
-                                x-on:click.prevent.stop="$dispatch('close')">{{ __('Отмена') }}</button>
+                                x-on:click.prevent.stop="$dispatch('close'); $dispatch('clear-form')">{{ __('Отмена') }}</button>
                             <button class="rounded-2xl py-3 bg-orange-600 inline-flex justify-center items-center px-4 border border-transparent text-white tracking-widest hover:bg-gray-200 hover:text-orange-600 focus:bg-gray-700 transition ease-in-out duration-150"
                                 type="submit">{{ __('Добавить') }}</button>
                             <p x-show="selected!='new'" class="text-5xl font-medium text-orange-600 ml-5 cursor-pointer" x-on:click.prevent.stop="$dispatch('open-modal', 'del-project')">&#128465;</p>
