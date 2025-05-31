@@ -18,7 +18,7 @@
         </div>
 
         <div class="block overflow-x-hidden w-[calc(500px+3rem)] xl:w-[calc(1000px+7rem)]">
-            <div class="w-full flex duration-1000" :class="lslide || 'ml-[calc(-1000px-7rem)]'">
+            <div class="w-full flex duration-1000" :class="lslide || 'ml-[calc(-500px-3rem)] xl:ml-[calc(-1000px-7rem)]'">
                 <div class="xl:columns-2 mt-14">
                     @foreach($directions['1'] as $direction)
                         <x-spec-card :direction=$direction :specialties=$specialties></x-card>
