@@ -31,6 +31,9 @@ Route::middleware('auth')->group(function () {
     Route::put('/d4/{id}', [TeacherController::class, 'add'])->name('dashboard4.add');
     Route::delete('/d4', [TeacherController::class, 'remove'])->name('dashboard4.remove');
 
+    Route::put('/d5/{id}', [ProjectController::class, 'add'])->name('dashboard5.add');
+    Route::delete('/d5', [ProjectController::class, 'remove'])->name('dashboard5.remove');
+
     Route::put('/d6/{id}', [PhotoController::class, 'add'])->name('dashboard6.upload');
     Route::delete('/d6', [PhotoController::class, 'remove'])->name('dashboard6.remove');
 });

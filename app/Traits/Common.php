@@ -16,6 +16,6 @@ trait Common
             return $carry;
         });
 
-        Storage::delete($relPath);
+        $relPath && Storage::delete($relPath);
     }
 }
