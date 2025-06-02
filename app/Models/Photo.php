@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Facades\Vite;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,10 +18,10 @@ class Photo extends Model
         'department_id',
     ];
 
-    protected $hidden = ['created_at','updated_at','department_id'];
+    protected $hidden = ['created_at','updated_at','department_id','path'];
 
     private function checkImageAlignment(string $path): string {
-        list($img_w, $img_h) = getimagesize(base_path($path));
+        list($img_w, $img_h) = getimagesize(public_path('storage/'.$path));
         return $img_w < $img_h ? 'object-contain' : 'object-cover';
     }
 
@@ -33,10 +32,10 @@ class Photo extends Model
         );
     }
 
-    protected function path(): Attribute
+    protected function url(): Attribute
     {
         return Attribute::make(
-            get: fn (string $value) => Vite::asset($value),
+            get: fn (?string $value, array $attributes) => asset('storage/'.$attributes['path']),
         );
     }
 

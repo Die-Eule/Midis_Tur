@@ -34,7 +34,7 @@
                             <p class="text-5xl font-medium text-orange-500">&#128465;</p>
                         </div>
                     @endifadmin
-                    <img src="{{ $item->path }}" alt="" id="{{$loop->index}}"
+                    <img src="{{ $item->url }}" alt="" id="{{$loop->index}}"
                         class="w-[500px] h-[320px] rounded-xl object-cover"
                         x-init="collection[{{$loop->index}}]=$el.src"
                         x-on:click.prevent.stop="selected=$el.id; $dispatch('open-modal', 'gallery')">

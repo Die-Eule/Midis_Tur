@@ -3,17 +3,15 @@
 namespace App\Http\Controllers;
 use App\Models\Photo;
 use App\Models\Department;
-use App\Traits\Common;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class PhotoController extends Controller
 {
-    use Common;
     
     public function index(string $id)
     {
-        $gallery = Photo::where('department_id', $id)->where('project_id', 0)->orderBy('updated_at', 'desc')->get();
+        $gallery = Photo::where('department_id', $id)->where('project_id', 0)->orderBy('updated_at', 'desc')->get()->append('url');
         $department = Department::where('id', $id)->first();
         return view('dashboard6', compact('department', 'gallery'));
     }
@@ -21,8 +19,8 @@ class PhotoController extends Controller
     public function add(Request $req, string $id)
     {
         if ($req->hasFile('new_photo')) {
-            $path = 'dep/'.$id;
-            $data['path'] = 'storage/app/private/'.$req->file('new_photo')->store($path);
+            $path = 'images/dep/'.$id;
+            $data['path'] = $req->file('new_photo')->store($path, 'public');
             $data['project_id'] = 0;
             $data['department_id'] = $id;
             Photo::create($data);
@@ -34,7 +32,7 @@ class PhotoController extends Controller
     {
         $photo = Photo::where('id', $req->input('photo_id'))->first();
         if ($photo) {
-            $this->deleteFile($photo->path);
+            Storage::disk('public')->delete($photo->path);
             $photo->delete();
         }
 

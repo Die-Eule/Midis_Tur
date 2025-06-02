@@ -29,11 +29,11 @@ class DepartmentSeeder extends Seeder
                 'id' => 3,
                 'name' => 'Кафедра Математики и Информатики',
                 'pic' => 'dep/3/students.png',
-                'video' => 'IT_tour.mp4',
+                'video' => 'videos/dep/3/tour.mp4',
             ],
             [
                 'id' => 4,
-                'name' => 'Кафедра Гастрономии и Гостиничного дела',
+                'name' => 'Кафедра гостеприимства и международных бизнес-коммуникаций',
                 'pic' => '',
                 'video' => '',
             ],

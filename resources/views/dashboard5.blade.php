@@ -20,14 +20,14 @@
         <div class="grid grid-cols-1 xl:grid-cols-2 gap-4 mt-14">
             @ifadmin(Auth::user())
                 <div class="w-[500px] h-[320px] shadow-lg rounded-xl bg-white mb-10 mx-6 flex justify-center items-center cursor-pointer"
-                    x-init="titles['new']={path:placeholder,alignment:'object-none'}; collection['new']=[]; projects['new']={autor:'',grade:'1',year:'1'};"
+                    x-init="titles['new']={url:placeholder,alignment:'object-none'}; collection['new']=[]; projects['new']={autor:'',grade:'1',year:'1'};"
                     x-on:click.stop="selected='new'; $dispatch('open-modal', 'project')">
                     <img :src="placeholder" alt="">
                 </div>
             @endifadmin
             @foreach($projects as $proj)
                 <div class="mb-8 cursor-pointer">
-                    <img src="{{ $gallery[$proj->id]->first()->path }}" alt="" id="{{$proj->id}}"
+                    <img src="{{ $gallery[$proj->id]->first()->url }}" alt="" id="{{$proj->id}}"
                         class="w-[500px] h-[320px] shadow-lg rounded-xl {{$gallery[$proj->id]->first()->alignment}} bg-stone-700 mb-3 mx-6"
             @ifadmin(Auth::user())
                         x-init="titles[{{$proj->id}}]=collection[{{$proj->id}}].splice(0, 1)[0];
@@ -62,7 +62,7 @@
                     @method('put')
                     <div class="w-full flex flex-col items-center gap-5">
                         <input type="hidden" name="project_id" :value="selected">
-                        <x-photo-fit-input name="title" width="w-[375px]" hight="h-[240px]" initial="titles[selected].path" newMode="(selected=='new')"/>
+                        <x-photo-fit-input name="title" width="w-[375px]" hight="h-[240px]" initial="titles[selected].url" newMode="(selected=='new')"/>
                         <div class="w-full flex flex-col items-center">
                             <div class="w-full space-y-3">
                                 <fieldset class="flex gap-4">
@@ -100,20 +100,20 @@
                                 </template>
                                 <template x-for="(value, index) in collection[selected]" :key="index">
                                     <div class="">
-                                        <img :src="value['path']" alt="" :id="'src'+index"
+                                        <img :src="value['url']" alt="" :id="'src'+index"
                                             class="w-[40px] h-[40px] mr-2 object-cover cursor-pointer hidden" :class="{'hidden': collection[selected][index]['hidden']}"
                                             x-init="if ('id' in value) { collection[selected][index]['hidden'] = 0; }"
-                                            x-on:click="$dispatch('pic-to-delete', collection[selected][index]['path']); to_del=index; $dispatch('open-modal', 'del-dop');">
+                                            x-on:click="$dispatch('pic-to-delete', collection[selected][index]['url']); to_del=index; $dispatch('open-modal', 'del-dop');">
                                         <input type="file" accept="image/*" :name="'dop_photo'+index" class="hidden" :id="'inp'+index"
-                                            x-on:change="collection[selected][curr_inp]['path'] = URL.createObjectURL($event.target.files[0]);
+                                            x-on:change="collection[selected][curr_inp]['url'] = URL.createObjectURL($event.target.files[0]);
                                                          collection[selected][curr_inp]['hidden'] = 0;
-                                                         $el.previousElementSibling.src=collection[selected][curr_inp]['path'];
+                                                         $el.previousElementSibling.src=collection[selected][curr_inp]['url'];
                                                          dop_count++;">
                                     </div>
                                 </template>
                                 <button class="rounded-xl shadow-lg ml-4" x-ref="plus_button" x-show="dop_count < 7" x-on:click.prevent.stop="
                                         curr_inp=collection[selected].length;
-                                        collection[selected][curr_inp]={'path': placeholder};
+                                        collection[selected][curr_inp]={'url': placeholder};
                                         collection[selected][curr_inp]['hidden'] = 1;
                                         await $nextTick();
                                         document.getElementById('inp'+curr_inp).click();">
@@ -170,7 +170,7 @@
                     <div class="w-[20px] ml-5" x-on:click="slide > 0 ? slide-- : null">
                         <img src="{{ Vite::asset('resources/images/arrow.svg') }}" class="hover:w-[20px]" alt="">
                     </div>
-                    <img :src="collection[selected][slide]['path']" alt=""
+                    <img :src="collection[selected][slide]['url']" alt=""
                         class="mx-5 max-w-6xl max-h-[94vh] rounded-xl">
                     <div class="w-[20px] mr-5" x-on:click="slide < collection[selected].length -1 ? slide++ : null">
                         <img src="{{ Vite::asset('resources/images/arrow.svg') }}" class="hover:w-[20px] -scale-x-100" alt="">

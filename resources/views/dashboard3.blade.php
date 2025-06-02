@@ -38,7 +38,7 @@
             </div></a>
 
             <a href="{{ route('dashboard5', $department->id) }}">
-                <div style="background-image: url({{ Vite::asset('resources/images/'.$department->pic) }})"
+                <div style="background-image: url({{ Vite::asset('resources/images/dep/students.png') }})"
                         class="bg-cover bg-center p-10 rounded-xl w-[500px] h-[280px] mb-10 mx-6 relative shadow-lg">
                     <p class="text-black text-base absolute bottom-0 left-0 bg-white/85 w-[100%] rounded-b-xl py-2">&emsp;Взгляните на работы студентов кафедры</p>
                 </div>
@@ -54,7 +54,7 @@
                             $el.pause();
                             $el.currentTime = 0;
                         } })">
-                <source src="{{ Vite::asset('resources/video/'.$department->video) }}" type="video/mp4">
+                <source src="{{ asset('storage/'.$department->video) }}" type="video/mp4">
                 Ваш браузер не поддерживает встроенные видео.
             </video>
         </x-modal-viz>

@@ -30,13 +30,6 @@ class ProjectSeeder extends Seeder
                 'year' => 4,
                 'department_id' => 3,
             ],
-            [
-                'id' => 3,
-                'author' => 'Эдвард Каллен',
-                'grade' => 1,
-                'year' => 2,
-                'department_id' => 3,
-            ],
             // Кафедра Гастрономии и Гостиничного дела
             // Кафедра Лингвистики
         ]);

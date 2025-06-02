@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 use App\Models\Teacher;
 use App\Models\Department;
-use App\Traits\Common;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 class TeacherController extends Controller
 {
-    use Common;
     
     public function index(string $id)
     {
@@ -25,8 +24,8 @@ class TeacherController extends Controller
         $teacher->middlename = $req->input('middlename');
         $teacher->position   = $req->input('position');
         if ($req->hasFile('new_photo')) {
-            $path = 'storage/app/private/'.$req->file('new_photo')->store('dep/'.$teacher->department_id);
-            $this->deleteFile($teacher->pic);
+            $path = $req->file('new_photo')->store('images/dep/'.$teacher->department_id, 'public');
+            Storage::disk('public')->delete($teacher->pic);
             $teacher->pic = $path;
         }
 
@@ -36,18 +35,19 @@ class TeacherController extends Controller
 
     public function add(Request $req, string $id)
     {
-        $teacher['surname']    = $req->input('surname');
-        $teacher['name']       = $req->input('name');
-        $teacher['middlename'] = $req->input('middlename');
-        $teacher['position']   = $req->input('position');
-        $teacher['department_id'] = $id;
+        $teacher = new Teacher;
+        $teacher->surname    = $req->input('surname');
+        $teacher->name       = $req->input('name');
+        $teacher->middlename = $req->input('middlename');
+        $teacher->position   = $req->input('position');
+        $teacher->department_id = $id;
         if ($req->hasFile('new_photo')) {
-            $teacher['pic'] = 'storage/app/private/'.$req->file('new_photo')->store('dep/'.$id);
+            $teacher->pic = $req->file('new_photo')->store('images/dep/'.$id, 'public');
         } else {
-            $teacher['pic'] = 'resources/images/dep/placeholder.webp';
+            $teacher->pic = '';
         }
         
-        Teacher::create($teacher);
+        $teacher->save();
         return redirect()->back();
     }
 
@@ -55,7 +55,7 @@ class TeacherController extends Controller
     {
         $teacher = Teacher::where('id', $req->input('teacher_id'))->first();
         if ($teacher) {
-            $this->deleteFile($teacher->pic);
+            Storage::disk('public')->delete($teacher->pic);
             $teacher->delete();
         }
 

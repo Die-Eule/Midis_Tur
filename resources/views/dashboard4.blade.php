@@ -32,7 +32,7 @@
             @endifadmin
             @foreach($staff as $persone)
             <div class="mb-8 cursor-pointer" x-on:click.prevent="selected={{$loop->index}}; $dispatch('open-modal', 'person')">
-                <img src="{{ Vite::asset($persone->pic) }}" alt="" class="w-[375px] h-[520px] shadow-lg rounded-xl object-cover"
+                <img src="{{$persone->url }}" alt="" class="w-[375px] h-[520px] shadow-lg rounded-xl object-cover"
                     x-init="photos[{{$loop->index}}]=$el.src">
                 <p class="font-kslab text-orange-600 text-lg mt-4">{{$persone->surname.' '.$persone->name.' '.$persone->middlename}}</p>
                 <p class="w-[375px]">{{$persone->position}}</p>

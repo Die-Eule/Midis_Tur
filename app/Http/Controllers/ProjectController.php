@@ -4,17 +4,16 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Models\Photo;
 use App\Models\Department;
-use App\Traits\Common;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
-    use Common;
     
     public function index(string $id)
     {
         $projects = Project::where('department_id', $id)->get();
-        $gallery = Photo::where('department_id', $id)->where('project_id', '<>', 0)->orderBy('id', 'asc')->get()->append('alignment')->groupBy('project_id');
+        $gallery = Photo::where('department_id', $id)->where('project_id', '<>', 0)->orderBy('id', 'asc')->get()->append(['alignment', 'url'])->groupBy('project_id');
         $department = Department::where('id', $id)->first();
         return view('dashboard5', compact('department', 'projects', 'gallery'));
     }
@@ -31,7 +30,7 @@ class ProjectController extends Controller
 
             if ($req->hasFile('title')) {
                 $photo = new Photo;
-                $photo->path = 'storage/app/private/'.$req->file('title')->store('dep/'.$id);
+                $photo->path = $req->file('title')->store('images/dep/'.$id, 'public');
                 $photo->project_id = $project->id;
                 $photo->department_id = $id;
                 $photo->save();
@@ -40,7 +39,7 @@ class ProjectController extends Controller
             foreach ($req->file() as $key => $file) {
                 if (substr($key, 0, 9) != 'dop_photo') continue;
                 $photo = new Photo;
-                $photo->path = 'storage/app/private/'.$file->store('dep/'.$id);
+                $photo->path = $file->store('images/dep/'.$id, 'public');
                 $photo->project_id = $project->id;
                 $photo->department_id = $id;
                 $photo->save();
@@ -58,7 +57,7 @@ class ProjectController extends Controller
                 if (substr($key, 0, 9) != 'del_photo') continue;
                 $photo = $gallery->find($value);
                 if ($photo) {
-                    $this->deleteFile($photo->path);
+                    Storage::disk('public')->delete($photo->path);
                     $photo->delete();
                 }
             }
@@ -66,15 +65,15 @@ class ProjectController extends Controller
             foreach ($req->file() as $key => $file) {
                 if (substr($key, 0, 9) == 'dop_photo') {
                     $photo = new Photo;
-                    $photo->path = 'storage/app/private/'.$file->store('dep/'.$id);
+                    $photo->path = $file->store('images/dep/'.$id, 'public');
                     $photo->project_id = $project->id;
                     $photo->department_id = $id;
                     $photo->save();
                 } else if ($key == 'title') {
                     $photo = $gallery->first();
                     if ($photo) {
-                        $path = 'storage/app/private/'.$file->store('dep/'.$id);
-                        $this->deleteFile($photo->path);
+                        $path = $file->store('images/dep/'.$id, 'public');
+                        Storage::disk('public')->delete($photo->path);
                         $photo->path = $path;
                         $photo->save();
                     }
@@ -92,7 +91,7 @@ class ProjectController extends Controller
 
         $gallery->each( function($photo) {
             if ($photo) {
-                $this->deleteFile($photo->path);
+                Storage::disk('public')->delete($photo->path);
                 $photo->delete();
             }
         });
