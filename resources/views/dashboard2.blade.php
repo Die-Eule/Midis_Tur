@@ -2,23 +2,22 @@
 
     <!--Body-->
     <div class="w-full h-full flex flex-col items-center" x-data="{ lslide: true, allDirs: {}, allSpecs: {}, new_count: 1, selected: '' }">
-        <div class="font-kslab uppercase mt-16 flex flex-col justify-center items-center text-3xl text-orange-600">
-            <div class='flex items-center'>
-                <div class="w-[32px] h-[32px]">
-                    <a href="{{ route('dashboard') }}" class="pr-8">
-                        <img src="{{ Vite::asset('resources/images/arrow.svg') }}" class="hover:h-[32px]" alt="">
-                    </a>
-                </div>
-                <p>Где вы планируете проходить обучение?</p>
+        <div class="font-kslab uppercase mt-8 md:mt-16 flex flex-col justify-center items-center text-3xl text-orange-600">
+            <div class='flex flex-col md:flex-row items-center'>
+                <a href="{{ route('dashboard') }}" class="mb-8 md:mb-0 mr-20 md:mr-0">
+                    <div class="w-[32px] h-[32px] flex items-center">
+                        <img src="{{ Vite::asset('resources/images/arrow.svg') }}" class="hover:h-[32px]" alt=""><p class="md:hidden text-base pl-2">Назад</p>
+                    </div>
+                </a>
+                <p class="px-5 md:px-0 text-center">Где вы планируете проходить обучение?</p>
             </div>
-            <p class="mt-8">Колледж на базе 
-                <span class="cursor-pointer" x-on:click="lslide = true" :class="lslide && 'underline'">9 классов</span> / 
-                <span class="cursor-pointer" x-on:click="lslide = false":class="lslide || 'underline'">11 классов</span>
+            <p class="mt-8 px-5 text-center">Колледж на базе 
+                <span class="cursor-pointer" x-on:click="lslide = true" :class="lslide && 'underline'">9&nbsp;классов</span>&nbsp;/&nbsp;<span class="cursor-pointer" x-on:click="lslide = false":class="lslide || 'underline'">11&nbsp;классов</span>
             </p>
         </div>
 
-        <div class="block overflow-x-hidden w-[calc(500px+3rem)] xl:w-[calc(1000px+7rem)]">
-            <div class="w-full flex duration-1000" :class="lslide || 'ml-[calc(-500px-3rem)] xl:ml-[calc(-1000px-7rem)]'">
+        <div class="block overflow-x-hidden w-[calc(95vw+1rem)] xs:w-[calc(460px+1rem)] sm:w-[calc(500px+3rem)] xl:w-[calc(1000px+7rem)]">
+            <div class="w-full flex duration-1000" :class="lslide || 'ml-[calc(-95vw-1rem)] xs:ml-[calc(-460px-1rem)] sm:ml-[calc(-500px-3rem)] xl:ml-[calc(-1000px-7rem)]'">
                 <div class="xl:columns-2 mt-14">
                     @foreach($directions['1'] as $direction)
                         <x-spec-card :direction=$direction :specialties=$specialties></x-card>

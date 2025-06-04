@@ -29,7 +29,7 @@ $option = [
             </a>
         </div>
 
-        <div class="hidden xs:flex items-center min-w-[20rem]">
+        <div class="hidden xs:flex items-center sm:min-w-[20rem]">
             <img src="{{ Vite::asset('resources/images/'.$option['logo1']) }}" alt="telegram-icon" class="w-10">
             <img src="{{ Vite::asset('resources/images/'.$option['logo2']) }}" alt="vk-icon" class="w-10">
             <div class="ml-8 font-medium">
@@ -38,7 +38,7 @@ $option = [
             </div>
         </div>
 
-        @if(Auth::check())
+        @auth
         <!-- Settings Dropdown -->
         <div class="flex items-center sm:ms-6 min-w-[12%] justify-end">
             <x-dropdown align="right" width="48">
@@ -74,6 +74,6 @@ $option = [
         </div>
         @else
         <x-secondary-button onclick="window.location='{{ route('login') }}'">{{ __('Войти') }}</x-secondary-button>
-        @endif
+        @endauth
     </div>
 </nav>
