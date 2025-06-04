@@ -48,7 +48,7 @@
                 dop_count--;
                 to_del=0;">
             <x-modal-viz name="project" maxWidth="md" bg="bg-white" focusable strict>
-                <form enctype="multipart/form-data" method="post" action="{{ route('dashboard5.add', $proj->department_id) }}" class="p-10 relative" x-data="{baloon: false}"
+                <form enctype="multipart/form-data" method="post" action="{{ route('dashboard5.add', $department->id) }}" class="p-10 relative" x-data="{baloon: false}"
                         x-on:submit.prevent="if (selected=='new' && $refs.browse.value=='') {baloon=true} else {$el.submit()}"
                         x-on:clear-form="
                             curr_inp=0; dop_count=0; dop_count[selected]=[]; forDelete[selected]=[];

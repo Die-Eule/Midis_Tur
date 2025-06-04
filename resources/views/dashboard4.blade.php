@@ -75,7 +75,7 @@
             </x-modal-viz>
 
             <x-modal-viz name="add-person" maxWidth="4xl" bg="bg-white" strict>
-                <form enctype="multipart/form-data" method="post" action="{{ route('dashboard4.add', $persone->department_id) }}" class="p-5"
+                <form enctype="multipart/form-data" method="post" action="{{ route('dashboard4.add', $department->id) }}" class="p-5"
                         x-on:clear-form="$el.reset(); $refs.preview.src=photos[{{$staff->count()}}];">
                     @csrf
                     @method('put')
