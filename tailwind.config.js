@@ -17,10 +17,16 @@ export default {
                 inter: ['Inter'],
                 kslab: ['Kelly Slab'],
             },
+            backgroundSize: {
+                'fit-hp': 'auto 100%',
+                'fit-h': 'auto 100vh',
+                'fit-w': '100vw auto',
+            },
         },
         screens: {
             'xs': '30rem',
             ...defaultTheme.screens,
+            'wide': {'raw': '(min-aspect-ratio: 16 / 9)'},
         },
     },
 

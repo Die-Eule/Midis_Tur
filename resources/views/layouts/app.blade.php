@@ -19,7 +19,8 @@
                 'min-h-screen',
                 'bg-stone-200' => ! @isset($attributes['specialStyle']),
                 'bg-gray-100' => @isset($attributes['specialStyle']),
-                "bg-[url('../images/background_main.png')]" => @isset($attributes['specialStyle'])
+                "bg-[url('../images/background_main.png')]" => @isset($attributes['specialStyle']),
+                "wide:bg-fit-w bg-fit-h" => @isset($attributes['specialStyle']),
         ])>
             @php
                 $colorOption = @isset($attributes['specialStyle']) ? 1 : 2;
