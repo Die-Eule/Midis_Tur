@@ -27,6 +27,8 @@ export default {
             'xs': '30rem',
             ...defaultTheme.screens,
             'wide': {'raw': '(min-aspect-ratio: 16 / 9)'},
+            'hi-ls': {'raw': '(orientation: landscape) and (height > 32rem)'},
+            'lo-ls': {'raw': '(orientation: landscape) and (height <= 32rem)'},
         },
     },
 
@@ -34,4 +36,5 @@ export default {
         forms,
         require('flowbite/plugin')
     ],
+    darkMode: 'false',
 };

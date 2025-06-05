@@ -17,7 +17,7 @@ $option = [
 ][$option];
 @endphp
 
-<div class="max-w-full {{$option['gap']}} px-6 lg:px-8 flex justify-between xs:justify-center items-center {{$option['color']}}">
+<div class="max-w-full {{$option['gap']}} px-6 lg:px-8 pt-4 flex justify-between xs:justify-center items-center {{$option['color']}}">
 
     <!-- Logo -->
     <div class="shrink-0 flex flex-col xs:flex-row xs:items-center xs:min-w-[5rem] lg:min-w-[20rem] justify-between min-h-[90px]">
