@@ -4,11 +4,12 @@
     <div class="w-full h-full flex flex-col items-center" x-data="{ lslide: true, allDirs: {}, allSpecs: {}, new_count: 1, selected: '' }">
         <div class="font-kslab uppercase mt-8 md:mt-16 flex flex-col justify-center items-center text-3xl text-orange-600">
             <div class='flex flex-col md:flex-row items-center'>
-                <a href="{{ route('dashboard') }}" class="mb-8 md:mb-0 mr-20 md:mr-0">
-                    <div class="w-[32px] h-[32px] flex items-center">
-                        <img src="{{ Vite::asset('resources/images/arrow.svg') }}" class="hover:h-[32px]" alt=""><p class="md:hidden text-base pl-2">Назад</p>
-                    </div>
-                </a>
+                <div>
+                    <a href="{{ route('dashboard') }}" class="flex items-center mb-8 md:mb-0">
+                        <div class="w-[32px] h-[32px]"><img src="{{ Vite::asset('resources/images/arrow.svg') }}" class="hover:h-[32px]" alt=""></div>
+                        <p class="md:hidden text-base pl-2">Назад</p>
+                    </a>
+                </div>
                 <p class="px-5 md:px-0 text-center">Где вы планируете проходить обучение?</p>
             </div>
             <p class="mt-8 px-5 text-center">Колледж на базе 

@@ -25,6 +25,7 @@ export default {
         },
         screens: {
             'xs': '30rem',
+            'ns': '35rem',
             ...defaultTheme.screens,
             'wide': {'raw': '(min-aspect-ratio: 16 / 9)'},
             'hi-ls': {'raw': '(orientation: landscape) and (height > 32rem)'},

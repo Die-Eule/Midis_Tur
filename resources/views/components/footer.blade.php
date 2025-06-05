@@ -12,7 +12,7 @@ $option = [
         'color' => 'text-orange-600',
         'logo1' => 'telegram_orange.png',
         'logo2' => 'vk_orange.png',
-        'gap' => 'mt-16',
+        'gap' => 'mt-4 hi-ls:mt-16',
         ],
 ][$option];
 @endphp
