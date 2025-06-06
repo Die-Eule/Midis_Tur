@@ -3,7 +3,7 @@
     <!--Body-->
     <div class="w-full h-full flex flex-col items-center">
         <div class="font-kslab uppercase mt-8 md:mt-16 flex flex-col justify-center items-center text-3xl text-orange-600">
-            <div class='flex flex-col md:flex-row items-center'>
+            <div class="flex flex-col md:flex-row items-center">
                 <div>
                     <a href="{{ route('dashboard2') }}" class="flex items-center mb-8 md:mb-0">
                         <div class="w-[32px] h-[32px]"><img src="{{ Vite::asset('resources/images/arrow.svg') }}" class="hover:h-[32px]" alt=""></div>

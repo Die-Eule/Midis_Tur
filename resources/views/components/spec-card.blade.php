@@ -19,7 +19,7 @@
         @endforelse
         </ul>
     </div>
-    @ifadmin(Auth::user())
+    @ifadmin
         <div class="w-full flex justify-end">
             <x-primary-button id="{{$direction->id}}" x-on:click.prevent.stop="selected=$el.id; $dispatch('open-modal', 'change-directions')">{{ __('Изменить') }}</x-primary-button>
         </div>
