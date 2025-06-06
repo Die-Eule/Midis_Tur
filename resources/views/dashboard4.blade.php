@@ -6,24 +6,27 @@
 
     <!--Body-->
     <div class="w-full h-full flex flex-col items-center" x-data="{ selected: 0, photos: {}}">
-        <div class="font-kslab uppercase mt-16 flex justify-center items-center text-3xl text-orange-600">
-            <div class="w-[32px] h-[32px]">
-                <a href="{{ route('dashboard3', $department->id) }}" class="pr-8">
-                    <img src="{{ Vite::asset('resources/images/arrow.svg') }}" class="hover:h-[32px]" alt="">
-                </a>
+        <div class="font-kslab uppercase mt-8 md:mt-16 flex flex-col justify-center items-center text-3xl text-orange-600">
+            <div class="flex flex-col md:flex-row items-center">
+                <div>
+                    <a href="{{ route('dashboard3', $department->id) }}" class="flex items-center mb-8 md:mb-0">
+                        <div class="w-[32px] h-[32px]"><img src="{{ Vite::asset('resources/images/arrow.svg') }}" class="hover:h-[32px]" alt=""></div>
+                        <p class="md:hidden text-base pl-2">Назад</p>
+                    </a>
+                </div>
+                <p class="px-5 md:px-0 text-center">{{$department->name}}</p>
             </div>
-            <p>{{$department->name}}</p>
         </div>
 
-        @ifadmin(Auth::user())
+        @ifadmin
             <script>
                 var collection = {{ Js::from($staff) }};
             </script>
         @endifadmin
 
-        <div class="flex flex-wrap justify-between w-[450px] xl:w-[900px] mt-14">
-            @ifadmin(Auth::user())
-                <div class="w-[375px] h-[520px] shadow-lg rounded-xl bg-white mb-8 flex justify-center items-center cursor-pointer"
+        <div class="flex flex-col xl:flex-row xl:flex-wrap justify-between items-ceneter xl:w-[900px] mt-14">
+            @ifadmin
+                <div class="w-[78vw] h-[108vw] xs:w-[375px] xs:h-[520px] shadow-lg rounded-xl bg-white mb-8 flex justify-center items-center cursor-pointer"
                     x-on:click.prevent="$dispatch('open-modal', 'add-person')">
                     <img src="{{ Vite::asset('resources/images/plus_sign.svg') }}" alt=""
                         x-init="photos[{{$staff->count()}}]=$el.src; collection[{{$staff->count()}}]={id: 0}; collection[{{$staff->count()}}].name='';
@@ -31,16 +34,17 @@
                 </div>
             @endifadmin
             @foreach($staff as $persone)
-            <div class="mb-8 cursor-pointer" x-on:click.prevent="selected={{$loop->index}}; $dispatch('open-modal', 'person')">
-                <img src="{{$persone->url }}" alt="" class="w-[375px] h-[520px] shadow-lg rounded-xl object-cover"
+            <div x-on:click.prevent="selected={{$loop->index}}; $dispatch('open-modal', 'person')"
+                    @class(["w-[78vw] xs:w-[375px] mb-8", "cursor-pointer" => Auth::user() && Auth::user()->isAdmin()])>
+                <img src="{{$persone->url }}" alt="" class="w-full h-[108vw] xs:h-[520px] shadow-lg rounded-xl object-cover"
                     x-init="photos[{{$loop->index}}]=$el.src">
                 <p class="font-kslab text-orange-600 text-lg mt-4">{{$persone->surname.' '.$persone->name.' '.$persone->middlename}}</p>
-                <p class="w-[375px]">{{$persone->position}}</p>
+                <p>{{$persone->position}}</p>
             </div>
             @endforeach
         </div>
 
-        @ifadmin(Auth::user())
+        @ifadmin
 
             <x-modal-viz name="person" maxWidth="4xl" bg="bg-white" strict>
                 <form enctype="multipart/form-data" method="post" action="{{ route('dashboard4.update') }}" class="p-5"

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\ServiceProvider;
 
@@ -21,8 +22,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Blade::if('ifadmin', function (?User $user) {
-            return $user && $user->isAdmin();
+        Blade::if('ifadmin', function () {
+            $user = Auth::user();
+            return $user && $user instanceof User && $user->isAdmin();
         });
     }
 }
