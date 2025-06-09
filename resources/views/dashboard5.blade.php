@@ -9,17 +9,20 @@
                         forDelete: {},
                         placeholder: '{{ Vite::asset('resources/images/plus_sign.svg') }}' }">
         <div class="font-kslab uppercase mt-16 flex justify-center items-center text-3xl text-orange-600">
-            <div class="w-[32px] h-[32px]">
-                <a href="{{ route('dashboard3', $department->id) }}" class="pr-8">
-                    <img src="{{ Vite::asset('resources/images/arrow.svg') }}" class="hover:h-[32px]" alt="">
-                </a>
+            <div class="flex flex-col md:flex-row items-center">
+                <div>
+                    <a href="{{ route('dashboard3', $department->id) }}" class="flex items-center mb-8 md:mb-0">
+                        <div class="w-[32px] h-[32px]"><img src="{{ Vite::asset('resources/images/arrow.svg') }}" class="hover:h-[32px]" alt=""></div>
+                        <p class="md:hidden text-base pl-2">Назад</p>
+                    </a>
+                </div>
+                <p class="px-5 md:px-0 text-center">{{$department->name}}</p>
             </div>
-            <p>{{$department->name}}</p>
         </div>
 
         <div class="grid grid-cols-1 xl:grid-cols-2 gap-4 mt-14">
-            @ifadmin(Auth::user())
-                <div class="w-[500px] h-[320px] shadow-lg rounded-xl bg-white mb-10 mx-6 flex justify-center items-center cursor-pointer"
+            @ifadmin
+                <div class="w-[89vw] h-[57vw] ns:w-[500px] ns:h-[320px] shadow-lg rounded-xl bg-white mb-10 mx-6 flex justify-center items-center cursor-pointer"
                     x-init="titles['new']={url:placeholder,alignment:'object-none'}; collection['new']=[]; projects['new']={autor:'',grade:'1',year:'1'};"
                     x-on:click.stop="selected='new'; $dispatch('open-modal', 'project')">
                     <img :src="placeholder" alt="">
@@ -28,19 +31,19 @@
             @foreach($projects as $proj)
                 <div class="mb-8 cursor-pointer">
                     <img src="{{ $gallery[$proj->id]->first()->url }}" alt="" id="{{$proj->id}}"
-                        class="w-[500px] h-[320px] shadow-lg rounded-xl {{$gallery[$proj->id]->first()->alignment}} bg-stone-700 mb-3 mx-6"
-            @ifadmin(Auth::user())
+                        class="w-[89vw] h-[57vw] ns:w-[500px] ns:h-[320px] shadow-lg rounded-xl {{$gallery[$proj->id]->first()->alignment}} bg-stone-700 mb-3 mx-6"
+            @ifadmin
                         x-init="titles[{{$proj->id}}]=collection[{{$proj->id}}].splice(0, 1)[0];
                                 projects[{{$proj->id}}]={{ Js::from($proj) }};
                                 forDelete[{{$proj->id}}]=[];"
             @endifadmin
                         x-on:click.stop="selected=$el.id; slide=0; $dispatch('open-modal', 'project')">
-                    <p class="w-[500px] mt-2 mx-6">Автор работы: {{$proj->author}}, {{$proj->year}} курс {{$proj->grade == 1 ? 'колледжа' : 'института'}}</p>
+                    <p class="w-[89vw] ns:w-[500px] mt-2 mx-6">Автор работы: {{$proj->author}}, {{$proj->year}} курс {{$proj->grade == 1 ? 'колледжа' : 'института'}}</p>
                 </div>
             @endforeach
         </div>
 
-        @ifadmin(Auth::user())
+        @ifadmin
         <div x-data="{ curr_inp: 0, dop_count: 0, to_del: 0, backup: [] }"
             x-on:del-input="
                 if ('id' in collection[selected][to_del]) { forDelete[selected].push(collection[selected][to_del].id); }
@@ -166,13 +169,31 @@
         @else
 
             <x-modal-viz name="project" maxWidth="7xl">
-                <div class="flex justify-between items-center min-h-[95vh]">
-                    <div class="w-[20px] ml-5" x-on:click="slide > 0 ? slide-- : null">
+                <div class="flex justify-between finger:justify-center items-center h-[calc(100vh-3rem)]"
+                        x-data="{ mobile: window.matchMedia('(pointer: coarse)').matches, touchX: 0, touchY: 0, currX: 0, currY: 0 }"
+                        x-on:touchstart="touchX=$event.touches[0].clientX; touchY=$event.touches[0].clientY;"
+                        x-on:touchmove="currX=$event.touches[0].clientX; currY=$event.touches[0].clientY;"
+                        x-on:touchend= "diffX=touchX-currX; diffY=touchY-currY;
+                                                if (Math.abs(diffX) < Math.abs(diffY)) {
+                                                    if (Math.abs(diffY) > 100) $dispatch('close');
+                                                }">
+                    <div class="w-[20px] ml-5 finger:hidden" x-on:click="slide > 0 ? slide-- : null">
                         <img src="{{ Vite::asset('resources/images/arrow.svg') }}" class="hover:w-[20px]" alt="">
                     </div>
-                    <img :src="collection[selected][slide]['url']" alt=""
-                        class="mx-5 max-w-6xl max-h-[94vh] rounded-xl">
-                    <div class="w-[20px] mr-5" x-on:click="slide < collection[selected].length -1 ? slide++ : null">
+                    <template x-if="!mobile">
+                        <img :src="collection[selected][slide]['url']" alt=""
+                            class="mx-5 max-w-6xl max-h-[94vh] rounded-xl">
+                    </template>
+                    <template x-if="mobile">
+                        <div class="flex gap-4 px-1 overflow-x-auto">
+                            <template x-for="(value, index) in collection[selected]" :key="index">
+                                <div class="h-[85vh] portrait:w-[90vw] flex-none flex flex-col justify-center">
+                                    <img :src="value['url']" alt="" class="landscape:h-[85vh] portrait:w-[90vw] rounded-xl object-contain">
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+                    <div class="w-[20px] mr-5 finger:hidden" x-on:click="slide < collection[selected].length -1 ? slide++ : null">
                         <img src="{{ Vite::asset('resources/images/arrow.svg') }}" class="hover:w-[20px] -scale-x-100" alt="">
                     </div>
                 </div>

@@ -24,12 +24,15 @@ export default {
             },
         },
         screens: {
-            'xs': '30rem',
-            'ns': '35rem',
+            'xs': '30rem', // 480px
+            'ns': '35rem', // 560px
             ...defaultTheme.screens,
             'wide': {'raw': '(min-aspect-ratio: 16 / 9)'},
             'hi-ls': {'raw': '(orientation: landscape) and (height > 32rem)'},
             'lo-ls': {'raw': '(orientation: landscape) and (height <= 32rem)'},
+            'finger': {'raw': '(pointer: coarse)'},
+            'portrait': {'raw': '(orientation: portrait)'},
+            'landscape': {'raw': '(orientation: landscape)'},
         },
     },
 
