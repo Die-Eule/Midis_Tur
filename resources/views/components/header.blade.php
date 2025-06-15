@@ -30,11 +30,19 @@ $option = [
         </div>
 
         <div class="hidden xs:flex items-center sm:min-w-[20rem]">
-            <img src="{{ Vite::asset('resources/images/'.$option['logo1']) }}" alt="telegram-icon" class="w-10">
-            <img src="{{ Vite::asset('resources/images/'.$option['logo2']) }}" alt="vk-icon" class="w-10">
+            <a href="https://t.me/officialMIDIS" target="_blank" rel="noopener noreferrer">
+                <img src="{{ Vite::asset('resources/images/'.$option['logo1']) }}" alt="telegram-icon" class="w-10">
+            </a>
+            <a href="https://vk.com/midis" target="_blank" rel="noopener noreferrer">
+                <img src="{{ Vite::asset('resources/images/'.$option['logo2']) }}" alt="vk-icon" class="w-10">
+            </a>
             <div class="ml-8 font-medium">
-                <p class="text-{{$option['color']}} [text-shadow:_0_4px_4px_rgb(0_0_0_/_0.4)]">+7 (351) 202-00-73</p>
-                <p class="text-{{$option['color']}} [text-shadow:_0_4px_4px_rgb(0_0_0_/_0.4)]">info@midis.ru</p>
+                <a href="tel:+73512020073" class="text-{{$option['color']}} [text-shadow:_0_4px_4px_rgb(0_0_0_/_0.4)] block">
+                    +7 (351) 202-00-73
+                </a>
+                <a href="mailto:info@midis.ru" class="text-{{$option['color']}} [text-shadow:_0_4px_4px_rgb(0_0_0_/_0.4)] block">
+                    info@midis.ru
+                </a>
             </div>
         </div>
 
